@@ -1,0 +1,79 @@
+﻿<Window x:Class="MouseConductor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MouseConductor"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        mc:Ignorable="d"
+        SizeToContent="WidthAndHeight"
+        Title="Volume Scroller - Settings"
+        ResizeMode="NoResize"
+        Icon="/Resources/VolumeScroller_light.ico">
+    <DockPanel Margin="10">
+        <tb:TaskbarIcon IconSource="{Binding TaskBarIconPath}"
+                        ToolTipText="Volume Scroller"
+                        MenuActivation="RightClick"
+                        TrayLeftMouseUp="TaskbarIcon_TrayLeftMouseUp">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Settings"
+                              Click="SettingsMenuItem_Click" />
+                    <Separator />
+                    <MenuItem Header="Exit"
+                              Click="ExitMenuItem_Click" />
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Volume increment"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalAlignment="Right" />
+                <Label Content="{Binding Increment}"
+                       HorizontalAlignment="Left"
+                       Grid.Row="0"
+                       Grid.Column="1" />
+            </StackPanel>
+            <Slider Width="100"
+                    Minimum="2"
+                    Maximum="20"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Value="{Binding Increment, Mode=TwoWay}"
+                    TickPlacement="BottomRight"
+                    AutoToolTipPlacement="TopLeft"
+                    IsSnapToTickEnabled="True"
+                    TickFrequency="2" />
+            <Label Content="Dark Mode"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   HorizontalAlignment="Right" />
+            <CheckBox Grid.Row="1"
+                      Grid.Column="1"
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding DarkModeActive, Mode=TwoWay}"/>
+            <Button Content="Ok"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Width="80"
+                    Height="22"
+                    Margin="0 20 0 0"
+                    Click="OkButton_Click" />
+        </Grid>
+    </DockPanel>
+</Window>
