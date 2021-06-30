@@ -79,5 +79,15 @@ namespace VolumeScroller.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
+        /// </summary>
+        internal static System.Drawing.Icon VolumeScroller_light_ApplicationIcon {
+            get {
+                object obj = ResourceManager.GetObject("VolumeScroller_light_ApplicationIcon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

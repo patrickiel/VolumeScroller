@@ -4,18 +4,10 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+	<ApplicationIcon>Resources\VolumeScroller_light_ApplicationIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Program - Kopieren.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Resources\VolumeScroller_dark.ico" />
-    <None Remove="Resources\VolumeScroller_light.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
+	<ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     <PackageReference Include="Ikst.MouseHook" Version="1.0.0" />
     <PackageReference Include="System.Management" Version="5.0.0" />
@@ -28,6 +20,7 @@
   <ItemGroup>
     <Resource Include="Resources\VolumeScroller_dark.ico" />
     <Resource Include="Resources\VolumeScroller_light.ico" />
+    <Resource Include="Resources\VolumeScroller_light_ApplicationIcon.ico" />
   </ItemGroup>
 	
   <ItemGroup>
