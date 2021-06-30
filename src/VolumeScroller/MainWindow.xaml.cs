@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace MouseConductor
+namespace VolumeScroller
 {
     /// <summary>
     /// Interaktionslogik für Settings.xaml

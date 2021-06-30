@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace MouseConductor
+namespace VolumeScroller
 {
     public class MainModel
     {
@@ -13,12 +13,12 @@ namespace MouseConductor
         {
         }
 
-        public static bool DarkModeActive
+        public static bool DarkTaskbar
         {
-            get => Properties.Settings.Default.DarkModeActive;
+            get => Properties.Settings.Default.DarkTaskbar;
             set
             {
-                Properties.Settings.Default.DarkModeActive = value;
+                Properties.Settings.Default.DarkTaskbar = value;
                 Properties.Settings.Default.Save();
             }
         }

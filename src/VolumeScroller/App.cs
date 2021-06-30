@@ -11,7 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace MouseConductor
+namespace VolumeScroller
 {
     public partial class App : Application
     {

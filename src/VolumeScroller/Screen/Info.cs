@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace MouseConductor.Screen
+namespace VolumeScroller.Screen
 {
     public class Info
     {

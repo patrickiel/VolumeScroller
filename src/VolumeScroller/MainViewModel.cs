@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace MouseConductor
+namespace VolumeScroller
 {
     public class MainViewModel : ViewModelBase
     {
         private readonly MainModel mainModel;
-        private bool darkModeActive;
+        private bool darkTaskbar;
         private int increment;
 
         public MainViewModel(MainModel mainModel)
@@ -19,17 +19,17 @@ namespace MouseConductor
         }
 
         public string TaskBarIconPath
-            => DarkModeActive
-                ? "/Resources/VolumeScroller_light.ico"
-                : "/Resources/VolumeScroller_dark.ico";
+            => DarkTaskbar
+                ? "/Resources/VolumeScroller_dark.ico"
+                : "/Resources/VolumeScroller_light.ico";
 
-        public bool DarkModeActive
+        public bool DarkTaskbar
         {
-            get => MainModel.DarkModeActive;
+            get => MainModel.DarkTaskbar;
             set
             {
-                SetProperty(ref darkModeActive, value);
-                MainModel.DarkModeActive = value;
+                SetProperty(ref darkTaskbar, value);
+                MainModel.DarkTaskbar = value;
                 OnPropertyChanged(nameof(TaskBarIconPath));
             }
         }

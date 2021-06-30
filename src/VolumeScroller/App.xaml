@@ -1,7 +1,7 @@
-﻿<Application x:Class="MouseConductor.App"
+﻿<Application x:Class="VolumeScroller.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:MouseConductor"
+             xmlns:local="clr-namespace:VolumeScroller"
              Startup="App_Startup"
              ShutdownMode="OnExplicitShutdown">
 </Application>

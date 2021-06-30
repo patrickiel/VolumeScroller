@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MouseConductor.Properties {
+namespace VolumeScroller.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -38,12 +38,12 @@ namespace MouseConductor.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool DarkModeActive {
+        public bool DarkTaskbar {
             get {
-                return ((bool)(this["DarkModeActive"]));
+                return ((bool)(this["DarkTaskbar"]));
             }
             set {
-                this["DarkModeActive"] = value;
+                this["DarkTaskbar"] = value;
             }
         }
     }
