@@ -13,7 +13,7 @@ namespace VolumeScroller
         {
         }
 
-        public static bool DarkTaskbar
+        public bool DarkTaskbar
         {
             get => Properties.Settings.Default.DarkTaskbar;
             set
@@ -23,7 +23,7 @@ namespace VolumeScroller
             }
         }
 
-        public static int Increment
+        public int Increment
         {
             get => Properties.Settings.Default.Increment;
             set

@@ -16,6 +16,8 @@ namespace VolumeScroller
         public MainViewModel(MainModel mainModel)
         {
             this.mainModel = mainModel;
+            darkTaskbar = mainModel.DarkTaskbar;
+            increment = mainModel.Increment * 2;
         }
 
         public string TaskBarIconPath
@@ -25,22 +27,22 @@ namespace VolumeScroller
 
         public bool DarkTaskbar
         {
-            get => MainModel.DarkTaskbar;
+            get => darkTaskbar;
             set
             {
                 SetProperty(ref darkTaskbar, value);
-                MainModel.DarkTaskbar = value;
+                mainModel.DarkTaskbar = value;
                 OnPropertyChanged(nameof(TaskBarIconPath));
             }
         }
 
         public int Increment
         {
-            get => MainModel.Increment * 2;
+            get => increment;
             set
             {
                 SetProperty(ref increment, value);
-                MainModel.Increment = value / 2;
+                mainModel.Increment = value / 2;
             }
         }
     }
