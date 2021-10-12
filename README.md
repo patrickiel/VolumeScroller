@@ -1,6 +1,9 @@
 # Volume Scroller
 Change the volume by scrolling over the taskbar.
 
+## Downloads
+Download from [releases](https://github.com/patrickiel/VolumeScroller/releases).
+
 ## Features
 - multi-monitor support
 - taskbar at different positions is supported
