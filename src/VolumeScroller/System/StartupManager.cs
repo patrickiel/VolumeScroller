@@ -31,7 +31,7 @@ internal class StartupManager
         }
         else
         {
-            registryKey.DeleteValue(process.ProcessName);
+            registryKey.DeleteValue(process.ProcessName, false);
         }
     }
 }

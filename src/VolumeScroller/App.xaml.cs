@@ -24,11 +24,11 @@ public partial class App : Application
         audioController = new AudioController(screenInfo);
     }
 
-    private void ShutdownIfAlreadyRunning()
+    private static void ShutdownIfAlreadyRunning()
     {
         Process currentProcess = Process.GetCurrentProcess();
         int count = Process.GetProcesses()
-                          .Count(p => p.ProcessName.Equals(currentProcess.ProcessName));
+                           .Count(p => p.ProcessName.Equals(currentProcess.ProcessName));
 
         if (count > 1)
         {

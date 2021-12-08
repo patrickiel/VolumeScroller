@@ -19,6 +19,7 @@ public class MainViewModel : ViewModelBase
         this.mainModel = mainModel;
         darkTaskbar = mainModel.DarkTaskbar;
         increment = mainModel.Increment * 2;
+        runOnStartup = mainModel.RunOnStartup;
     }
 
     public string TaskBarIconPath
@@ -36,6 +37,7 @@ public class MainViewModel : ViewModelBase
             OnPropertyChanged(nameof(TaskBarIconPath));
         }
     }
+
     public bool RunOnStartup
     {
         get => runOnStartup;
