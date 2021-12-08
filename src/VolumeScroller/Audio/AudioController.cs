@@ -6,41 +6,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace VolumeScroller
+namespace VolumeScroller;
+
+public class AudioController : IDisposable
 {
-    public class AudioController : IDisposable
+    private readonly MouseHook mouseHook;
+
+    public AudioController(Screen.Info screenInfo)
     {
-        private readonly MouseHook mouseHook;
+        mouseHook = new();
 
-        public AudioController(Screen.Info screenInfo)
+        mouseHook.MouseWheel += st =>
         {
-            mouseHook = new();
+            bool onTaskbar = screenInfo.OnTaskbar(new Point(st.pt.x, st.pt.y));
+            int increment = Properties.Settings.Default.Increment;
 
-            mouseHook.MouseWheel += st =>
+            if (st.mouseData == 7864320 && onTaskbar)
             {
-                bool onTaskbar = screenInfo.OnTaskbar(new Point(st.pt.x, st.pt.y));
-                int increment = Properties.Settings.Default.Increment;
-
-                if (st.mouseData == 7864320 && onTaskbar)
+                for (int i = 1; i <= increment; i++)
                 {
-                    for (int i = 1; i <= increment; i++)
-                    {
-                        AudioControllerNative.VolumeUp();
-                    }
+                    AudioControllerNative.VolumeUp();
                 }
-                else if (st.mouseData == 4287102976 && onTaskbar)
+            }
+            else if (st.mouseData == 4287102976 && onTaskbar)
+            {
+                for (int i = 1; i <= increment; i++)
                 {
-                    for (int i = 1; i <= increment; i++)
-                    {
-                        AudioControllerNative.VolumeDown();
-                    }
+                    AudioControllerNative.VolumeDown();
                 }
-            };
+            }
+        };
 
-            mouseHook.Start();
-        }
-
-        public void Dispose() 
-            => mouseHook.Stop();
+        mouseHook.Start();
     }
+
+    public void Dispose()
+        => mouseHook.Stop();
 }

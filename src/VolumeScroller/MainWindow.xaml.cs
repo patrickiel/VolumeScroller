@@ -13,66 +13,65 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace VolumeScroller
+namespace VolumeScroller;
+
+/// <summary>
+/// Interaktionslogik für Settings.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaktionslogik für Settings.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    private bool isHidden;
+
+    public MainWindow(MainViewModel mainViewModel)
     {
-        private bool isHidden;
+        InitializeComponent();
+        DataContext = mainViewModel;
+        HideWindow();
+    }
 
-        public MainWindow(MainViewModel mainViewModel)
+    private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
+        => Application.Current.Shutdown();
+
+    protected override void OnClosing(CancelEventArgs e)
+    {
+        e.Cancel = true;
+        HideWindow();
+    }
+
+    private void OkButton_Click(object sender, RoutedEventArgs e)
+        => HideWindow();
+
+    private void TaskbarIcon_TrayLeftMouseUp(object sender, RoutedEventArgs e)
+        => ToggleVisibility();
+
+    private void SettingsMenuItem_Click(object sender, RoutedEventArgs e)
+        => ShowWindow();
+
+    private void HideWindow()
+    {
+        Visibility = Visibility.Hidden;
+        ShowInTaskbar = false;
+        isHidden = true;
+    }
+
+    private void ShowWindow()
+    {
+        Visibility = Visibility.Visible;
+        ShowInTaskbar = true;
+        Show();
+        Activate();
+        isHidden = false;
+    }
+
+    private void ToggleVisibility()
+    {
+        if (isHidden)
         {
-            InitializeComponent();
-            DataContext = mainViewModel;
+            ShowWindow();
+        }
+        else
+        {
             HideWindow();
-        }
-
-        private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
-            => Application.Current.Shutdown();
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            e.Cancel = true;
-            HideWindow();
-        }
-
-        private void OkButton_Click(object sender, RoutedEventArgs e)
-            => HideWindow();
-
-        private void TaskbarIcon_TrayLeftMouseUp(object sender, RoutedEventArgs e) 
-            => ToggleVisibility();
-
-        private void SettingsMenuItem_Click(object sender, RoutedEventArgs e)
-            => ShowWindow();
-
-        private void HideWindow()
-        {
-            Visibility = Visibility.Hidden;
-            ShowInTaskbar = false;
-            isHidden = true;
-        }
-
-        private void ShowWindow()
-        {
-            Visibility = Visibility.Visible;
-            ShowInTaskbar = true;
-            Show();
-            Activate();
-            isHidden = false;
-        }
-
-        private void ToggleVisibility()
-        {
-            if (isHidden)
-            {
-                ShowWindow();
-            }
-            else
-            {
-                HideWindow();
-            }
         }
     }
 }

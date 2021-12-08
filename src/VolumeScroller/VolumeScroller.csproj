@@ -1,10 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net5.0-windows</TargetFramework>
+		<TargetFramework>net6.0-windows</TargetFramework>
 		<UseWPF>true</UseWPF>
 		<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
-		<ApplicationIcon>Resources\VolumeScroller_light_ApplicationIcon.ico</ApplicationIcon>
+		<ApplicationIcon>Resources\VolumeScroller_light_ApplicationIcon.ico</ApplicationIcon>		
+   		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DebugType>none</DebugType>
+	  <DebugSymbols>false</DebugSymbols>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -5,45 +5,54 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace VolumeScroller
+namespace VolumeScroller;
+
+public class MainViewModel : ViewModelBase
 {
-    public class MainViewModel : ViewModelBase
+    private readonly MainModel mainModel;
+    private bool darkTaskbar;
+    private int increment;
+    private bool runOnStartup;
+
+    public MainViewModel(MainModel mainModel)
     {
-        private readonly MainModel mainModel;
-        private bool darkTaskbar;
-        private int increment;
+        this.mainModel = mainModel;
+        darkTaskbar = mainModel.DarkTaskbar;
+        increment = mainModel.Increment * 2;
+    }
 
-        public MainViewModel(MainModel mainModel)
+    public string TaskBarIconPath
+        => DarkTaskbar
+            ? "/Resources/VolumeScroller_dark.ico"
+            : "/Resources/VolumeScroller_light.ico";
+
+    public bool DarkTaskbar
+    {
+        get => darkTaskbar;
+        set
         {
-            this.mainModel = mainModel;
-            darkTaskbar = mainModel.DarkTaskbar;
-            increment = mainModel.Increment * 2;
+            SetProperty(ref darkTaskbar, value);
+            mainModel.DarkTaskbar = value;
+            OnPropertyChanged(nameof(TaskBarIconPath));
         }
-
-        public string TaskBarIconPath
-            => DarkTaskbar
-                ? "/Resources/VolumeScroller_dark.ico"
-                : "/Resources/VolumeScroller_light.ico";
-
-        public bool DarkTaskbar
+    }
+    public bool RunOnStartup
+    {
+        get => runOnStartup;
+        set
         {
-            get => darkTaskbar;
-            set
-            {
-                SetProperty(ref darkTaskbar, value);
-                mainModel.DarkTaskbar = value;
-                OnPropertyChanged(nameof(TaskBarIconPath));
-            }
+            SetProperty(ref runOnStartup, value);
+            mainModel.RunOnStartup = value;
         }
+    }
 
-        public int Increment
+    public int Increment
+    {
+        get => increment;
+        set
         {
-            get => increment;
-            set
-            {
-                SetProperty(ref increment, value);
-                mainModel.Increment = value / 2;
-            }
+            SetProperty(ref increment, value);
+            mainModel.Increment = value / 2;
         }
     }
 }
