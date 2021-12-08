@@ -12,7 +12,7 @@ public class MainModel
 {
     public MainModel()
     {
-        SyncRunOnStartup();
+        ResetRunOnStartup();
     }
 
     public bool DarkTaskbar
@@ -45,6 +45,6 @@ public class MainModel
         }
     }
 
-    public void SyncRunOnStartup() 
+    public void ResetRunOnStartup() 
         => RunOnStartup = Properties.Settings.Default.RunOnStartup;
 }

@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Volume Scroller"
-#define MyAppVersion "1.1"
+#define MyAppVersion "1.1.0"
 #define MyAppPublisher "Patrick Demichiel"
 #define MyAppURL "https://github.com/patrickiel/VolumeScroller"
 #define MyAppExeName "VolumeScroller.exe"
@@ -10,7 +10,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{E01C083B-490F-4C97-AA90-AF5E22B8921D}
+AppId={{92D151DD-115E-496D-B266-DFA8DE4ECE78}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -23,11 +23,11 @@ DisableProgramGroupPage=yes
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputDir=C:\Users\Patrick Demichiel\Desktop\Neuer Ordner
-OutputBaseFilename=mysetup
+OutputBaseFilename=Volume Scroller 1.1.0
 Compression=lzma
 SolidCompression=yes
-WizardStyle=modern
+WizardStyle=modern     
+UninstallDisplayIcon={app}\{#MyAppExeName}
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -55,24 +55,15 @@ Name: "slovenian"; MessagesFile: "compiler:Languages\Slovenian.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
 Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
-
-[Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-
+  
 [Files]
-Source: "C:\Users\Patrick Demichiel\source\repos\VolumeScroller\src\VolumeScroller\bin\Release\VolumeScroller-1.1.0\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Patrick Demichiel\source\repos\VolumeScroller\src\VolumeScroller\bin\Release\VolumeScroller-1.1.0\Hardcodet.NotifyIcon.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Patrick Demichiel\source\repos\VolumeScroller\src\VolumeScroller\bin\Release\VolumeScroller-1.1.0\Ikst.MouseHook.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Patrick Demichiel\source\repos\VolumeScroller\src\VolumeScroller\bin\Release\VolumeScroller-1.1.0\System.Management.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Patrick Demichiel\source\repos\VolumeScroller\src\VolumeScroller\bin\Release\VolumeScroller-1.1.0\VolumeScroller.deps.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Patrick Demichiel\source\repos\VolumeScroller\src\VolumeScroller\bin\Release\VolumeScroller-1.1.0\VolumeScroller.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Patrick Demichiel\source\repos\VolumeScroller\src\VolumeScroller\bin\Release\VolumeScroller-1.1.0\VolumeScroller.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Patrick Demichiel\source\repos\VolumeScroller\src\VolumeScroller\bin\Release\VolumeScroller-1.1.0\VolumeScroller.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\src\VolumeScroller\bin\Release\net6.0-windows\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\src\VolumeScroller\bin\Release\net6.0-windows\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; 
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
