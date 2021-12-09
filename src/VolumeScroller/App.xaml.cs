@@ -26,8 +26,10 @@ public partial class App : Application
 
     private static void ShutdownIfAlreadyRunning()
     {
+        var currentSessionID = Process.GetCurrentProcess().SessionId;
         Process currentProcess = Process.GetCurrentProcess();
         int count = Process.GetProcesses()
+                           .Where(p => p.SessionId == currentSessionID)
                            .Count(p => p.ProcessName.Equals(currentProcess.ProcessName));
 
         if (count > 1)
