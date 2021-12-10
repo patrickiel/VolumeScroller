@@ -8,8 +8,7 @@
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
         Title="Volume Scroller - Settings"
-        ResizeMode="NoResize"
-        Icon="/Resources/VolumeScroller_light.ico">
+        ResizeMode="NoResize">
     <DockPanel Margin="10">
         <tb:TaskbarIcon IconSource="{Binding TaskBarIconPath}"
                         ToolTipText="Volume Scroller"
