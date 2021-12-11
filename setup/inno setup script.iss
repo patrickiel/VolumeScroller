@@ -8,6 +8,7 @@
 #define MyAppExeName "VolumeScroller.exe"
 
 [Setup]
+SignTool=MsSign $f
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{92D151DD-115E-496D-B266-DFA8DE4ECE78}
