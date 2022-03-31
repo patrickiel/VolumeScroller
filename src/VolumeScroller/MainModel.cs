@@ -7,16 +7,6 @@ public class MainModel
         ResetRunOnStartup();
     }
 
-    public bool DarkTaskbar
-    {
-        get => Properties.Settings.Default.DarkTaskbar;
-        set
-        {
-            Properties.Settings.Default.DarkTaskbar = value;
-            Properties.Settings.Default.Save();
-        }
-    }
-
     public int Increment
     {
         get => Properties.Settings.Default.Increment;

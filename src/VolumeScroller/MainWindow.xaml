@@ -57,14 +57,6 @@
                     AutoToolTipPlacement="TopLeft"
                     IsSnapToTickEnabled="True"
                     TickFrequency="2" />
-            <Label Content="Dark taskbar"
-                   Grid.Row="1"
-                   Grid.Column="0"
-                   HorizontalAlignment="Right" />
-            <CheckBox Grid.Row="1"
-                      Grid.Column="1"
-                      VerticalAlignment="Center"
-                      IsChecked="{Binding DarkTaskbar, Mode=TwoWay}"/>
             <Label Content="Run on startup"
                    Grid.Row="2"
                    Grid.Column="0"

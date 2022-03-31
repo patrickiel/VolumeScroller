@@ -16,6 +16,7 @@ namespace VolumeScroller;
 public partial class App : Application
 {
     private AudioController audioController;
+    private static MainViewModel mainViewModel;
 
     public void App_Startup(object sender, StartupEventArgs e)
     {
@@ -49,13 +50,14 @@ public partial class App : Application
     private static void InitializeTrayIcon()
     {
         MainModel main = new();
-        MainViewModel mainViewModel = new(main);
+        mainViewModel = new(main);
         MainWindow mainWindow = new(mainViewModel);
         mainWindow.Show();
     }
 
     private void Application_Exit(object sender, ExitEventArgs e)
     {
+        mainViewModel.Dispose();
         audioController.Dispose();
         SystemEvents.DisplaySettingsChanged -= DisplaySettingsChanged;
     }

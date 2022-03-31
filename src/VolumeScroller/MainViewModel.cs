@@ -1,34 +1,27 @@
-﻿namespace VolumeScroller;
+﻿using Microsoft.Win32;
 
-public class MainViewModel : ViewModelBase
+namespace VolumeScroller;
+
+public class MainViewModel : ViewModelBase, IDisposable
 {
     private readonly MainModel mainModel;
-    private bool darkTaskbar;
     private int increment;
     private bool runOnStartup;
+    private string taskBarIconPath;
 
     public MainViewModel(MainModel mainModel)
     {
         this.mainModel = mainModel;
-        darkTaskbar = mainModel.DarkTaskbar;
         increment = mainModel.Increment * 2;
         runOnStartup = mainModel.RunOnStartup;
+        TaskBarIconPath = GetTaskbarIconPath();
+        SystemEvents.UserPreferenceChanged += UserPreferenceChanged;
     }
 
     public string TaskBarIconPath
-        => DarkTaskbar
-            ? "/Resources/VolumeScroller_dark.ico"
-            : "/Resources/VolumeScroller_light.ico";
-
-    public bool DarkTaskbar
     {
-        get => darkTaskbar;
-        set
-        {
-            SetProperty(ref darkTaskbar, value);
-            mainModel.DarkTaskbar = value;
-            OnPropertyChanged(nameof(TaskBarIconPath));
-        }
+        get => taskBarIconPath;
+        set => SetProperty(ref taskBarIconPath, value);
     }
 
     public bool RunOnStartup
@@ -49,5 +42,21 @@ public class MainViewModel : ViewModelBase
             SetProperty(ref increment, value);
             mainModel.Increment = value / 2;
         }
+    }
+
+    public void Dispose() 
+        => SystemEvents.UserPreferenceChanged -= UserPreferenceChanged;
+
+    private void UserPreferenceChanged(object sender, EventArgs e) 
+        => TaskBarIconPath = GetTaskbarIconPath();
+
+    private static string GetTaskbarIconPath()
+    {
+        RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
+        var isLightTheme = (int)key.GetValue("SystemUsesLightTheme") == 1;
+
+        return isLightTheme
+            ? "/Resources/VolumeScroller_light.ico"
+            : "/Resources/VolumeScroller_dark.ico";
     }
 }
