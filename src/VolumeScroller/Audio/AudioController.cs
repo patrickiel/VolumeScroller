@@ -12,8 +12,10 @@ public class AudioController : IDisposable
 {
     private readonly MouseHook mouseHook;
 
-    public AudioController(Screen.Info screenInfo)
+    public AudioController()
     {
+        Screen.Info screenInfo = new();
+
         mouseHook = new();
 
         mouseHook.MouseWheel += st =>

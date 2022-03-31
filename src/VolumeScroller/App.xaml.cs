@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -20,8 +21,15 @@ public partial class App : Application
     {
         ShutdownIfAlreadyRunning();
         InitializeTrayIcon();
-        Screen.Info screenInfo = new();
-        audioController = new AudioController(screenInfo);
+        audioController = new();
+
+        SystemEvents.DisplaySettingsChanged += DisplaySettingsChanged;
+    }
+
+    private void DisplaySettingsChanged(object sender, EventArgs e)
+    {
+        audioController?.Dispose();
+        audioController = new();
     }
 
     private static void ShutdownIfAlreadyRunning()
@@ -49,5 +57,6 @@ public partial class App : Application
     private void Application_Exit(object sender, ExitEventArgs e)
     {
         audioController.Dispose();
+        SystemEvents.DisplaySettingsChanged -= DisplaySettingsChanged;
     }
 }
