@@ -1,4 +1,6 @@
-﻿namespace VolumeScroller;
+﻿using System.Windows;
+
+namespace VolumeScroller;
 
 /// <summary>
 /// Interaktionslogik für Settings.xaml

@@ -1,11 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Data;
 using System.Windows;
 
 namespace VolumeScroller;
@@ -22,14 +15,6 @@ public partial class App : Application
     {
         ShutdownIfAlreadyRunning();
         InitializeTrayIcon();
-        audioController = new();
-
-        SystemEvents.DisplaySettingsChanged += DisplaySettingsChanged;
-    }
-
-    private void DisplaySettingsChanged(object sender, EventArgs e)
-    {
-        audioController?.Dispose();
         audioController = new();
     }
 
@@ -59,6 +44,5 @@ public partial class App : Application
     {
         mainViewModel.Dispose();
         audioController.Dispose();
-        SystemEvents.DisplaySettingsChanged -= DisplaySettingsChanged;
     }
 }

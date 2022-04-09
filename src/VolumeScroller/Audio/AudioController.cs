@@ -1,10 +1,4 @@
 ﻿using Ikst.MouseHook;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace VolumeScroller;
 
@@ -14,13 +8,11 @@ public class AudioController : IDisposable
 
     public AudioController()
     {
-        Screen.Info screenInfo = new();
-
         mouseHook = new();
 
         mouseHook.MouseWheel += st =>
         {
-            bool onTaskbar = screenInfo.OnTaskbar(new Point(st.pt.x, st.pt.y));
+            bool onTaskbar = CursorInfo.IsOnTaskbar();
             int increment = Properties.Settings.Default.Increment;
 
             if (st.mouseData == 7864320 && onTaskbar)

@@ -5,4 +5,4 @@ global using System.Text;
 global using System.Threading.Tasks;
 global using System.Diagnostics;
 global using System.ComponentModel;
-global using System.Windows;
+global using System.Runtime.InteropServices;
