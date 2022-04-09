@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Volume Scroller"
-#define MyAppVersion "1.1.0"
+#define MyAppVersion "1.2.0"
 #define MyAppPublisher "Patrick Demichiel"
 #define MyAppURL "https://github.com/patrickiel/VolumeScroller"
 #define MyAppExeName "VolumeScroller.exe"
@@ -23,7 +23,7 @@ DefaultDirName={autopf64}\{#MyAppName}
 DisableProgramGroupPage=yes
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
-OutputBaseFilename=Volume Scroller 1.1.0
+OutputBaseFilename={#MyAppName} {#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern     
