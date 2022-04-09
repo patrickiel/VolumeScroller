@@ -1,5 +1,5 @@
 # Volume Scroller
-Change the volume by scrolling over the taskbar.
+Volume Scroller allows you to quickly change the system volume. All you have to do is hold the mouse pointer over the taskbar and turn the mouse wheel.
 
 ## Downloads
 Download from [releases](https://github.com/patrickiel/VolumeScroller/releases).
