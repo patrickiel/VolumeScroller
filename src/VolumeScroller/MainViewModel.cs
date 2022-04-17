@@ -5,15 +5,11 @@ namespace VolumeScroller;
 public class MainViewModel : ViewModelBase, IDisposable
 {
     private readonly MainModel mainModel;
-    private int increment;
-    private bool runOnStartup;
     private string taskBarIconPath;
 
     public MainViewModel(MainModel mainModel)
     {
-        this.mainModel = mainModel;
-        increment = mainModel.Increment * 2;
-        runOnStartup = mainModel.RunOnStartup;
+        this.mainModel = mainModel;       
         TaskBarIconPath = GetTaskbarIconPath();
         SystemEvents.UserPreferenceChanged += UserPreferenceChanged;
     }
@@ -26,28 +22,26 @@ public class MainViewModel : ViewModelBase, IDisposable
 
     public bool RunOnStartup
     {
-        get => runOnStartup;
-        set
-        {
-            SetProperty(ref runOnStartup, value);
-            mainModel.RunOnStartup = value;
-        }
+        get => mainModel.RunOnStartup;
+        set => mainModel.RunOnStartup = value;
+    }
+
+    public bool TaskbarMustBeVisible
+    {
+        get => mainModel.TaskbarMustBeVisible;
+        set => mainModel.TaskbarMustBeVisible = value;
     }
 
     public int Increment
     {
-        get => increment;
-        set
-        {
-            SetProperty(ref increment, value);
-            mainModel.Increment = value / 2;
-        }
+        get => mainModel.Increment * 2;
+        set => mainModel.Increment = value / 2;
     }
 
-    public void Dispose() 
+    public void Dispose()
         => SystemEvents.UserPreferenceChanged -= UserPreferenceChanged;
 
-    private void UserPreferenceChanged(object sender, EventArgs e) 
+    private void UserPreferenceChanged(object sender, EventArgs e)
         => TaskBarIconPath = GetTaskbarIconPath();
 
     private static string GetTaskbarIconPath()

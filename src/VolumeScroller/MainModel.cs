@@ -16,6 +16,18 @@ public class MainModel
             Properties.Settings.Default.Save();
         }
     }
+
+    public bool TaskbarMustBeVisible
+    {
+        get => Properties.Settings.Default.TaskbarMustBeVisible;
+        set
+        {
+            Properties.Settings.Default.TaskbarMustBeVisible = value;
+            Properties.Settings.Default.Save();
+            new StartupManager(Process.GetCurrentProcess()).Set(value);
+        }
+    }
+
     public bool RunOnStartup
     {
         get => Properties.Settings.Default.RunOnStartup;

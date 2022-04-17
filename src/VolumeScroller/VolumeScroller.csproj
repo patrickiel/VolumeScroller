@@ -12,13 +12,18 @@
 	  <DebugSymbols>false</DebugSymbols>
 	</PropertyGroup>
 	<ItemGroup>
+	  <Compile Remove="Mouse\**" />
+	  <EmbeddedResource Remove="Mouse\**" />
+	  <None Remove="Mouse\**" />
+	  <Page Remove="Mouse\**" />
+	</ItemGroup>
+	<ItemGroup>
 	  <Content Include="VolumeScroller_ApplicationIcon.ico" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
 		<PackageReference Include="Ikst.MouseHook" Version="1.0.0" />
-		<PackageReference Include="System.Management" Version="5.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

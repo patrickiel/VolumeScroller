@@ -41,9 +41,9 @@ public static class CursorInfo2
         return windows.Select(i => i.Key).ToList();
     }
 
-    static Rectangle? GetRectangle(IntPtr hWnd) 
-        => GetWindowRect(hWnd, out RECT lpRect) 
-            ? new Rectangle(lpRect.Left, lpRect.Top, lpRect.Right - lpRect.Left, lpRect.Bottom - lpRect.Top) 
+    static Rectangle? GetRectangle(IntPtr hWnd)
+        => GetWindowRect(hWnd, out RECT lpRect)
+            ? new Rectangle(lpRect.Left, lpRect.Top, lpRect.Right - lpRect.Left, lpRect.Bottom - lpRect.Top)
             : null;
 
     static string GetClassName(IntPtr hWnd)
@@ -90,9 +90,9 @@ public static class CursorInfo2
     [StructLayout(LayoutKind.Sequential)]
     struct RECT
     {
-        public int Left;        // x position of upper-left corner
-        public int Top;         // y position of upper-left corner
-        public int Right;       // x position of lower-right corner
-        public int Bottom;      // y position of lower-right corner
+        public int Left;
+        public int Top;
+        public int Right;
+        public int Bottom;
     }
 }

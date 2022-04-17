@@ -58,13 +58,21 @@
                     IsSnapToTickEnabled="True"
                     TickFrequency="2" />
             <Label Content="Run on startup"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   HorizontalAlignment="Right" />
+            <CheckBox Grid.Row="1"
+                      Grid.Column="1"
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding RunOnStartup, Mode=TwoWay}" />
+            <Label Content="Taskbar must be visible"
                    Grid.Row="2"
                    Grid.Column="0"
                    HorizontalAlignment="Right" />
             <CheckBox Grid.Row="2"
                       Grid.Column="1"
                       VerticalAlignment="Center"
-                      IsChecked="{Binding RunOnStartup, Mode=TwoWay}"/>
+                      IsChecked="{Binding TaskbarMustBeVisible, Mode=TwoWay}" />
             <Button Content="Ok"
                     Grid.Row="3"
                     Grid.Column="1"
