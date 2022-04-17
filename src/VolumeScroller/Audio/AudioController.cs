@@ -1,6 +1,4 @@
-﻿using Ikst.MouseHook;
-
-namespace VolumeScroller;
+﻿namespace VolumeScroller;
 
 public class AudioController : IDisposable
 {
@@ -31,7 +29,7 @@ public class AudioController : IDisposable
             }
         };
 
-        mouseHook.Start();
+        mouseHook.Initialize();
     }
 
     private static void ExecuteNumberOfTimes(int numberOfTimes, Action action)
@@ -43,5 +41,5 @@ public class AudioController : IDisposable
     }
 
     public void Dispose()
-        => mouseHook.Stop();
+        => mouseHook.Terminate();
 }
