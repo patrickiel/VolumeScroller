@@ -2,7 +2,7 @@
 
 namespace VolumeScroller;
 
-public static class CursorInfo
+public static class CursorInfo1
 {
     private static readonly List<string> classNames = new() { "MSTaskListWClass", "Start", "InputIndicatorButton", "MSTaskSwWClass", "ToolbarWindow32", "TrayClockWClass", "TrayButton", "ClockButton" };
 

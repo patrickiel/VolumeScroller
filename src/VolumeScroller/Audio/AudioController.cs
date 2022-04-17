@@ -12,7 +12,7 @@ public class AudioController : IDisposable
 
         mouseHook.MouseWheel += st =>
         {
-            bool onTaskbar = CursorInfo.IsOnTaskbar();
+            bool onTaskbar = CursorInfo1.IsOnTaskbar();
             int increment = Properties.Settings.Default.Increment;
 
             if (st.mouseData == 7864320 && onTaskbar)
