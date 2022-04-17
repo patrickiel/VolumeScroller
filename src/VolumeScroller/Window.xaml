@@ -40,12 +40,13 @@
                        Grid.Row="0"
                        Grid.Column="0"
                        HorizontalAlignment="Right" />
-                <Label Content="{Binding Increment}"
+                <Label Content="{Binding ElementName=IncrementSlider, Path=Value}"
                        HorizontalAlignment="Left"
                        Grid.Row="0"
                        Grid.Column="1" />
             </StackPanel>
-            <Slider Width="100"
+            <Slider x:Name="IncrementSlider"
+                    Width="100"
                     Minimum="2"
                     Maximum="20"
                     Grid.Column="1"
@@ -55,6 +56,7 @@
                     Value="{Binding Increment, Mode=TwoWay}"
                     TickPlacement="BottomRight"
                     AutoToolTipPlacement="TopLeft"
+                    AutoToolTipPrecision="0"
                     IsSnapToTickEnabled="True"
                     TickFrequency="2" />
             <Label Content="Run on startup"

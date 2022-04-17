@@ -1,13 +1,14 @@
-﻿namespace VolumeScroller;
+﻿using Microsoft.Win32;
+
+namespace VolumeScroller;
 
 public class MainModel
 {
     public MainModel()
     {
-        ResetRunOnStartup();
     }
 
-    public int Increment
+    public static int Increment
     {
         get => Properties.Settings.Default.Increment;
         set
@@ -17,7 +18,7 @@ public class MainModel
         }
     }
 
-    public bool TaskbarMustBeVisible
+    public static bool TaskbarMustBeVisible
     {
         get => Properties.Settings.Default.TaskbarMustBeVisible;
         set
@@ -28,7 +29,19 @@ public class MainModel
         }
     }
 
-    public bool RunOnStartup
+    public static string TaskBarIconPath => GetTaskbarIconPath();
+
+    private static string GetTaskbarIconPath()
+    {
+        RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
+        var isLightTheme = (int)key.GetValue("SystemUsesLightTheme") == 1;
+
+        return isLightTheme
+            ? "/Resources/VolumeScroller_light.ico"
+            : "/Resources/VolumeScroller_dark.ico";
+    }
+
+    public static bool RunOnStartup
     {
         get => Properties.Settings.Default.RunOnStartup;
         set
@@ -38,7 +51,4 @@ public class MainModel
             new StartupManager(Process.GetCurrentProcess()).Set(value);
         }
     }
-
-    public void ResetRunOnStartup() 
-        => RunOnStartup = Properties.Settings.Default.RunOnStartup;
 }

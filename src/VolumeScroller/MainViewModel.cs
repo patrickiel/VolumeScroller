@@ -4,53 +4,36 @@ namespace VolumeScroller;
 
 public class MainViewModel : ViewModelBase, IDisposable
 {
-    private readonly MainModel mainModel;
     private string taskBarIconPath;
 
     public MainViewModel(MainModel mainModel)
-    {
-        this.mainModel = mainModel;       
-        TaskBarIconPath = GetTaskbarIconPath();
+    {     
         SystemEvents.UserPreferenceChanged += UserPreferenceChanged;
     }
 
-    public string TaskBarIconPath
+    public string TaskBarIconPath => MainModel.TaskBarIconPath;
+
+    public static bool RunOnStartup
     {
-        get => taskBarIconPath;
-        set => SetProperty(ref taskBarIconPath, value);
+        get => MainModel.RunOnStartup;
+        set => MainModel.RunOnStartup = value;
     }
 
-    public bool RunOnStartup
+    public static bool TaskbarMustBeVisible
     {
-        get => mainModel.RunOnStartup;
-        set => mainModel.RunOnStartup = value;
+        get => MainModel.TaskbarMustBeVisible;
+        set => MainModel.TaskbarMustBeVisible = value;
     }
 
-    public bool TaskbarMustBeVisible
+    public static int Increment
     {
-        get => mainModel.TaskbarMustBeVisible;
-        set => mainModel.TaskbarMustBeVisible = value;
-    }
-
-    public int Increment
-    {
-        get => mainModel.Increment * 2;
-        set => mainModel.Increment = value / 2;
+        get => MainModel.Increment * 2;
+        set => MainModel.Increment = value / 2;
     }
 
     public void Dispose()
         => SystemEvents.UserPreferenceChanged -= UserPreferenceChanged;
 
-    private void UserPreferenceChanged(object sender, EventArgs e)
-        => TaskBarIconPath = GetTaskbarIconPath();
-
-    private static string GetTaskbarIconPath()
-    {
-        RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
-        var isLightTheme = (int)key.GetValue("SystemUsesLightTheme") == 1;
-
-        return isLightTheme
-            ? "/Resources/VolumeScroller_light.ico"
-            : "/Resources/VolumeScroller_dark.ico";
-    }
+    private void UserPreferenceChanged(object sender, EventArgs e) 
+        => OnPropertyChanged(nameof(TaskBarIconPath));
 }
