@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VolumeScroller;
+﻿namespace VolumeScroller;
 
 public static class CursorInfo2
 {
@@ -56,8 +48,7 @@ public static class CursorInfo2
 
     static Point GetCursorPosition()
     {
-        POINT point;
-        GetCursorPos(out point);
+        GetCursorPos(out POINT point);
 
         return new Point(point.X, point.Y);
     }
@@ -70,7 +61,7 @@ public static class CursorInfo2
     [DllImport("USER32.DLL")]
     static extern IntPtr GetShellWindow();
 
-    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
     static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
     [DllImport("user32.dll", SetLastError = true)]

@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace VolumeScroller;
+﻿namespace VolumeScroller;
 
 public static class CursorInfo1
 {
@@ -27,7 +25,6 @@ public static class CursorInfo1
     [DllImport("user32.dll")]
     static extern IntPtr WindowFromPoint(Point point);
 
-    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
     static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
-
 }

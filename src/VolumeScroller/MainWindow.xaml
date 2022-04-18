@@ -75,7 +75,7 @@
                       Grid.Column="1"
                       VerticalAlignment="Center"
                       IsChecked="{Binding TaskbarMustBeVisible, Mode=TwoWay}" />
-            <Button Content="Ok"
+            <Button Content="Close"
                     Grid.Row="3"
                     Grid.Column="1"
                     HorizontalAlignment="Right"
@@ -83,7 +83,7 @@
                     Width="80"
                     Height="22"
                     Margin="0 20 0 0"
-                    Click="OkButton_Click" />
+                    Click="CloseButton_Click" />
         </Grid>
     </DockPanel>
 </Window>

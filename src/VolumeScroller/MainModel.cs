@@ -1,6 +1,4 @@
-﻿using Microsoft.Win32;
-
-namespace VolumeScroller;
+﻿namespace VolumeScroller;
 
 public class MainModel
 {

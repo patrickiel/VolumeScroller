@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace VolumeScroller;
+﻿namespace VolumeScroller;
 
 public abstract class ViewModelBase : INotifyPropertyChanged
 {

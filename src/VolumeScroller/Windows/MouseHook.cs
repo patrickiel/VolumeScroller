@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VolumeScroller;
+﻿namespace VolumeScroller;
 
 public class MouseHook
 {
@@ -14,6 +8,10 @@ public class MouseHook
     const int WM_MBUTTONDOWN = 0x0207;
     const int WM_MBUTTONUP = 0x0208;
 
+    MouseHookHandler hookHandler;
+    IntPtr hookID = IntPtr.Zero;
+
+    bool initialized;
 
     [StructLayout(LayoutKind.Sequential)]
     public struct POINT
@@ -39,11 +37,6 @@ public class MouseHook
     public event MouseHookCallback MouseWheelUp;
     public event MouseHookCallback MiddleButtonDown;
     public event MouseHookCallback MiddleButtonUp;
-
-    MouseHookHandler hookHandler;
-    IntPtr hookID = IntPtr.Zero;
-
-    bool initialized;
 
     public void Initialize()
     {
@@ -74,17 +67,14 @@ public class MouseHook
         Terminate();
     }
 
-
     private static IntPtr SetHook(MouseHookHandler proc)
     {
         using ProcessModule module = Process.GetCurrentProcess().MainModule;
         return SetWindowsHookEx(WH_MOUSE_LL, proc, GetModuleHandle(module.ModuleName), 0);
     }
 
-
     private IntPtr HookFunc(int nCode, IntPtr wParam, IntPtr lParam)
     {
-
         if (nCode >= 0)
         {
             switch ((int)wParam)
@@ -95,10 +85,12 @@ public class MouseHook
                     if (data.mouseData == 7864320)
                     {
                         MouseWheelUp?.Invoke((MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        return new IntPtr(1); // suppresses native behaviour
                     }
                     else if (data.mouseData == 4287102976)
                     {
                         MouseWheelDown?.Invoke((MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        return new IntPtr(1); // suppresses native behaviour
                     }
                     break;
 

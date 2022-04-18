@@ -16,32 +16,32 @@ public partial class MainWindow : Window
         HideWindow();
     }
 
-    private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
-        => Application.Current.Shutdown();
-
     protected override void OnClosing(CancelEventArgs e)
     {
         e.Cancel = true;
         HideWindow();
     }
 
-    private void OkButton_Click(object sender, RoutedEventArgs e)
+    void ExitMenuItem_Click(object sender, RoutedEventArgs e)
+        => Application.Current.Shutdown();
+
+    void CloseButton_Click(object sender, RoutedEventArgs e)
         => HideWindow();
 
-    private void TaskbarIcon_TrayLeftMouseUp(object sender, RoutedEventArgs e)
+    void TaskbarIcon_TrayLeftMouseUp(object sender, RoutedEventArgs e)
         => ToggleVisibility();
 
-    private void SettingsMenuItem_Click(object sender, RoutedEventArgs e)
+    void SettingsMenuItem_Click(object sender, RoutedEventArgs e)
         => ShowWindow();
 
-    private void HideWindow()
+    void HideWindow()
     {
         Visibility = Visibility.Hidden;
         ShowInTaskbar = false;
         isHidden = true;
     }
 
-    private void ShowWindow()
+    void ShowWindow()
     {
         Visibility = Visibility.Visible;
         ShowInTaskbar = true;
@@ -50,7 +50,7 @@ public partial class MainWindow : Window
         isHidden = false;
     }
 
-    private void ToggleVisibility()
+    void ToggleVisibility()
     {
         if (isHidden)
         {
