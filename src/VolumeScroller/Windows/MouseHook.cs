@@ -35,7 +35,8 @@ public class MouseHook
     public delegate void MouseHookCallback(MSLLHOOKSTRUCT mouseStruct);
     public delegate IntPtr MouseHookHandler(int nCode, IntPtr wParam, IntPtr lParam);
 
-    public event MouseHookCallback MouseWheel;
+    public event MouseHookCallback MouseWheelDown;
+    public event MouseHookCallback MouseWheelUp;
     public event MouseHookCallback MiddleButtonDown;
     public event MouseHookCallback MiddleButtonUp;
 
@@ -88,9 +89,17 @@ public class MouseHook
         {
             switch ((int)wParam)
             {
-
                 case WM_MOUSEWHEEL:
-                    MouseWheel?.Invoke((MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                    var data = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
+
+                    if (data.mouseData == 7864320)
+                    {
+                        MouseWheelUp?.Invoke((MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                    }
+                    else if (data.mouseData == 4287102976)
+                    {
+                        MouseWheelDown?.Invoke((MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                    }
                     break;
 
                 case WM_MBUTTONDOWN:

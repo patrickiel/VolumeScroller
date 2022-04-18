@@ -7,36 +7,25 @@ public class AudioController : IDisposable
     public AudioController()
     {
         mouseHook = new();
-
-        mouseHook.MouseWheel += st =>
-        {
-            bool onTaskbar = Properties.Settings.Default.TaskbarMustBeVisible
-                ? CursorInfo1.IsOnTaskbar()
-                : CursorInfo2.IsOnTaskbar();
-
-            int increment = Properties.Settings.Default.Increment;
-
-            if (onTaskbar)
-            {
-                if (st.mouseData == 7864320)
-                {
-                    ExecuteNumberOfTimes(increment, () => AudioControllerNative.VolumeUp());
-                }
-                else if (st.mouseData == 4287102976)
-                {
-                    ExecuteNumberOfTimes(increment, () => AudioControllerNative.VolumeDown());
-                }
-            }
-        };
-
+        mouseHook.MouseWheelUp += _ => ChangeVolume(() => AudioControllerNative.VolumeUp());
+        mouseHook.MouseWheelDown += _ => ChangeVolume(() => AudioControllerNative.VolumeDown());
         mouseHook.Initialize();
     }
 
-    private static void ExecuteNumberOfTimes(int numberOfTimes, Action action)
+    private static void ChangeVolume(Action action)
     {
-        for (int i = 1; i <= numberOfTimes; i++)
+        bool onTaskbar = Properties.Settings.Default.TaskbarMustBeVisible
+                        ? CursorInfo1.IsOnTaskbar()
+                        : CursorInfo2.IsOnTaskbar();
+
+        int increment = Properties.Settings.Default.Increment;
+
+        if (onTaskbar)
         {
-            action();
+            for (int i = 1; i <= increment; i++)
+            {
+                action();
+            }
         }
     }
 

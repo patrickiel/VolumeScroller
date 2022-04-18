@@ -4,25 +4,26 @@ namespace VolumeScroller;
 
 public class MainViewModel : ViewModelBase, IDisposable
 {
-    private string taskBarIconPath;
+    readonly MainModel mainModel;
 
     public MainViewModel(MainModel mainModel)
     {     
+        this.mainModel = mainModel;
         SystemEvents.UserPreferenceChanged += UserPreferenceChanged;
     }
 
     public string TaskBarIconPath => MainModel.TaskBarIconPath;
 
-    public static bool RunOnStartup
+    public bool RunOnStartup
     {
-        get => MainModel.RunOnStartup;
-        set => MainModel.RunOnStartup = value;
+        get => mainModel.RunOnStartup;
+        set => mainModel.RunOnStartup = value;
     }
 
-    public static bool TaskbarMustBeVisible
+    public bool TaskbarMustBeVisible
     {
-        get => MainModel.TaskbarMustBeVisible;
-        set => MainModel.TaskbarMustBeVisible = value;
+        get => mainModel.TaskbarMustBeVisible;
+        set => mainModel.TaskbarMustBeVisible = value;
     }
 
     public static int Increment

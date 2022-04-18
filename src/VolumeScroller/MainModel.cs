@@ -4,8 +4,12 @@ namespace VolumeScroller;
 
 public class MainModel
 {
+    readonly StartupManager startupManager;
+
     public MainModel()
     {
+        startupManager = new StartupManager(Process.GetCurrentProcess());
+        startupManager.Set(RunOnStartup);
     }
 
     public static int Increment
@@ -18,14 +22,14 @@ public class MainModel
         }
     }
 
-    public static bool TaskbarMustBeVisible
+    public bool TaskbarMustBeVisible
     {
         get => Properties.Settings.Default.TaskbarMustBeVisible;
         set
         {
             Properties.Settings.Default.TaskbarMustBeVisible = value;
             Properties.Settings.Default.Save();
-            new StartupManager(Process.GetCurrentProcess()).Set(value);
+            startupManager.Set(value);
         }
     }
 
@@ -41,14 +45,14 @@ public class MainModel
             : "/Resources/VolumeScroller_dark.ico";
     }
 
-    public static bool RunOnStartup
+    public bool RunOnStartup
     {
         get => Properties.Settings.Default.RunOnStartup;
         set
         {
             Properties.Settings.Default.RunOnStartup = value;
             Properties.Settings.Default.Save();
-            new StartupManager(Process.GetCurrentProcess()).Set(value);
+            startupManager.Set(value);
         }
     }
 }
