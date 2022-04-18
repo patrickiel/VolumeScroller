@@ -10,6 +10,7 @@ public class MouseHook
 
     MouseHookHandler hookHandler;
     IntPtr hookID = IntPtr.Zero;
+    Func<bool> isRelevant;
 
     bool initialized;
 
@@ -38,12 +39,13 @@ public class MouseHook
     public event MouseHookCallback MiddleButtonDown;
     public event MouseHookCallback MiddleButtonUp;
 
-    public void Initialize()
+    public void Initialize(Func<bool> isRelevant)
     {
         if (!initialized)
         {
             hookHandler = HookFunc;
             hookID = SetHook(hookHandler);
+            this.isRelevant = isRelevant;
 
             initialized = true;
         }
@@ -75,7 +77,7 @@ public class MouseHook
 
     private IntPtr HookFunc(int nCode, IntPtr wParam, IntPtr lParam)
     {
-        if (nCode >= 0)
+        if (nCode >= 0 && isRelevant())
         {
             switch ((int)wParam)
             {
@@ -84,12 +86,12 @@ public class MouseHook
 
                     if (data.mouseData == 7864320)
                     {
-                        MouseWheelUp?.Invoke((MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        MouseWheelUp?.Invoke(data);
                         return new IntPtr(1); // suppresses native behaviour
                     }
                     else if (data.mouseData == 4287102976)
                     {
-                        MouseWheelDown?.Invoke((MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        MouseWheelDown?.Invoke(data);
                         return new IntPtr(1); // suppresses native behaviour
                     }
                     break;

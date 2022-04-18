@@ -9,7 +9,9 @@ public class AudioController : IDisposable
         mouseHook = new();
         mouseHook.MouseWheelUp += _ => ChangeVolume(() => AudioControllerNative.VolumeUp());
         mouseHook.MouseWheelDown += _ => ChangeVolume(() => AudioControllerNative.VolumeDown());
-        mouseHook.Initialize();
+        mouseHook.Initialize(() => Properties.Settings.Default.TaskbarMustBeVisible
+                                ? CursorInfo1.IsOnTaskbar()
+                                : CursorInfo2.IsOnTaskbar());
     }
 
     private static void ChangeVolume(Action action)
