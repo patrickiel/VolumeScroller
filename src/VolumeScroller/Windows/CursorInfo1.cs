@@ -2,7 +2,7 @@
 
 public static class CursorInfo1
 {
-    private static readonly List<string> classNames = new() { "MSTaskListWClass", "Start", "InputIndicatorButton", "MSTaskSwWClass", "ToolbarWindow32", "TrayClockWClass", "TrayButton", "ClockButton" };
+    private static readonly List<string> classNames = new() { "MSTaskListWClass", "Start", "InputIndicatorButton", "MSTaskSwWClass", "ToolbarWindow32", "TrayClockWClass", "TrayButton", "ClockButton", "ReBarWindow32", "tooltips_class32", "TrayNotifyWnd" };
 
     public static bool IsOnTaskbar()
     {
