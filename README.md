@@ -14,7 +14,7 @@ Move the mouse over the taskbar and scroll up or down.
 ## Features
 - Run on startup (customizable)
 - Custom volume increment
-- Triggers only when the taskbar is visible (not in fullscreen mode)
+- It is possible to change in the settings whether the taskbar must be visible or not.
 - Multi-monitor support
 - Taskbar at different positions and sizes is supported
 - Auto Dark Mode support (for tray icon)
