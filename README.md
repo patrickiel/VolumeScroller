@@ -1,6 +1,6 @@
 
 # Volume Scroller
-Volume Scroller allows you to quickly change the volume! 
+Volume Scroller allows you to quickly change the volume.
 
 ![This is an image](https://github.com/patrickiel/VolumeScroller/blob/main/icons/VolumeScroller_Logo_128.png) 
 
