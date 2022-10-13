@@ -13,7 +13,7 @@ Move the mouse over the taskbar and scroll up or down.
 
 ## Features
 - Run on startup (customizable)
-- Custom Volume increment
+- Custom volume increment
 - Triggers only when the taskbar is visible (not in fullscreen mode)
 - Multi-monitor support
 - Taskbar at different positions and sizes is supported
