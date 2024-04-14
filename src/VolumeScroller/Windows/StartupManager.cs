@@ -1,28 +1,22 @@
 ﻿namespace VolumeScroller;
 
-internal class StartupManager
+internal class StartupManager(Process process)
 {
-    private readonly Process process;
-
-    public StartupManager(Process process)
-    {
-        this.process = process;
-    }
+    private readonly Process process = process;
 
     public void Set(bool runOnStartup)
     {
         string filePath = process.MainModule.FileName;
-        var registryKey = filePath.StartsWith(Environment.GetEnvironmentVariable("USERPROFILE"))
-            ? Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)
-            : Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+        RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
         if (runOnStartup)
         {
-            registryKey.SetValue(process.ProcessName, $"\"{filePath}\"");
+            key.SetValue(process.ProcessName, $"\"{filePath}\"");
         }
         else
         {
-            registryKey.DeleteValue(process.ProcessName, false);
+            key.DeleteValue(process.ProcessName, false);
         }
     }
 }

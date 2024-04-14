@@ -1,8 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿namespace VolumeScroller;
 
-namespace VolumeScroller;
-
-public class MainViewModel : ObservableObject, IDisposable
+public class MainViewModel : IDisposable
 {
     readonly MainModel mainModel;
 
@@ -37,4 +35,10 @@ public class MainViewModel : ObservableObject, IDisposable
 
     private void UserPreferenceChanged(object sender, EventArgs e)
         => OnPropertyChanged(nameof(TaskBarIconPath));
+
+
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
 }
