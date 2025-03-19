@@ -9,20 +9,16 @@ public class AudioController : IDisposable
         mouseHook = new();
         mouseHook.MouseWheelUp += _ => ChangeVolume(() => AudioControllerNative.VolumeUp());
         mouseHook.MouseWheelDown += _ => ChangeVolume(() => AudioControllerNative.VolumeDown());
-        mouseHook.Initialize(() => Properties.Settings.Default.TaskbarMustBeVisible
-                                ? CursorInfo1.IsOnTaskbar()
-                                : CursorInfo2.IsOnTaskbar());
+        mouseHook.Initialize(Applies);
     }
 
     private static void ChangeVolume(Action action)
     {
-        bool onTaskbar = Properties.Settings.Default.TaskbarMustBeVisible
-                        ? CursorInfo1.IsOnTaskbar()
-                        : CursorInfo2.IsOnTaskbar();
+        bool applies = Applies();
 
         int increment = Properties.Settings.Default.Increment;
 
-        if (onTaskbar)
+        if (applies)
         {
             for (int i = 1; i <= increment; i++)
             {
@@ -30,6 +26,18 @@ public class AudioController : IDisposable
             }
         }
     }
+
+    private static bool Applies() => Properties.Settings.Default.TriggerMode switch
+    {
+        0 => CursorInfo1.IsOnTaskbar(),
+        1 => CursorInfo2.IsOnTaskbar(),
+        2 => CursorInfoEdges.IsOnScreenEdges(Properties.Settings.Default.EnableBottomLeft,
+                                             Properties.Settings.Default.EnableTopLeft,
+                                             Properties.Settings.Default.EnableTopRight,
+                                             Properties.Settings.Default.EnableBottomRight,
+                                             Properties.Settings.Default.EdgeRadius),
+        _ => false,
+    };
 
     public void Dispose()
         => mouseHook.Terminate();

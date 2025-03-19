@@ -9,6 +9,10 @@
         SizeToContent="WidthAndHeight"
         Title="Volume Scroller - Settings"
         ResizeMode="NoResize">
+    <Window.Resources>
+        <local:EnumBooleanConverter x:Key="EnumBooleanConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
     <DockPanel Margin="10">
         <tb:TaskbarIcon IconSource="{Binding TaskBarIconPath}"
                         ToolTipText="Volume Scroller"
@@ -30,20 +34,27 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal">
+
+            <!-- Volume Increment -->
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2">
                 <Label Content="Volume increment"
-                       Grid.Row="0"
-                       Grid.Column="0"
                        HorizontalAlignment="Right" />
                 <Label Content="{Binding ElementName=IncrementSlider, Path=Value}"
-                       HorizontalAlignment="Left"
-                       Grid.Row="0"
-                       Grid.Column="1" />
+                       HorizontalAlignment="Left" />
             </StackPanel>
             <Slider x:Name="IncrementSlider"
                     Width="100"
@@ -59,6 +70,8 @@
                     AutoToolTipPrecision="0"
                     IsSnapToTickEnabled="True"
                     TickFrequency="2" />
+
+            <!-- Run on startup -->
             <Label Content="Run on startup"
                    Grid.Row="1"
                    Grid.Column="0"
@@ -67,22 +80,123 @@
                       Grid.Column="1"
                       VerticalAlignment="Center"
                       IsChecked="{Binding RunOnStartup, Mode=TwoWay}" />
-            <Label Content="Taskbar must be visible"
-                   Grid.Row="2"
-                   Grid.Column="0"
-                   HorizontalAlignment="Right" />
-            <CheckBox Grid.Row="2"
-                      Grid.Column="1"
-                      VerticalAlignment="Center"
-                      IsChecked="{Binding TaskbarMustBeVisible, Mode=TwoWay}" />
+
+            <!-- Mode Selection -->
+            <TextBlock Grid.Row="2"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Text="Mode"
+                       FontWeight="Bold"
+                       Margin="0,10,0,5"
+                       HorizontalAlignment="Left" />
+
+            <StackPanel Grid.Row="3"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="5">
+                <RadioButton Content="Taskbar Only (Requires visible taskbar)"
+                             Margin="0,3,0,3"
+                             IsChecked="{Binding Mode, ConverterParameter=TaskbarOnly, Converter={StaticResource EnumBooleanConverter}}"
+                             GroupName="TriggerMode" />
+
+                <RadioButton Content="Taskbar Always (Works with visible or hidden taskbar)"
+                             Margin="0,3,0,3"
+                             IsChecked="{Binding Mode, ConverterParameter=TaskbarAlways, Converter={StaticResource EnumBooleanConverter}}"
+                             GroupName="TriggerMode" />
+
+                <RadioButton Content="Screen Edges"
+                             Margin="0,3,0,3"
+                             IsChecked="{Binding Mode, ConverterParameter=ScreenEdges, Converter={StaticResource EnumBooleanConverter}}"
+                             GroupName="TriggerMode" />
+            </StackPanel>
+
+            <!-- Screen Edges Settings Section -->
+            <Border Grid.Row="5"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    BorderBrush="LightGray"
+                    BorderThickness="1"
+                    Margin="0,5,0,5"
+                    Padding="5"
+                    Visibility="{Binding IsEdgesModeSelected, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <StackPanel>
+                    <TextBlock Text="Screen Edges Settings"
+                               FontWeight="Bold"
+                               Margin="0,0,0,5"
+                               HorizontalAlignment="Left" />
+
+                    <!-- Edge Radius -->
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Edge detection radius"
+                               HorizontalAlignment="Left" />
+                        <Label Content="{Binding ElementName=EdgeRadiusSlider, Path=Value, StringFormat={}{0} px}"
+                               HorizontalAlignment="Left" />
+                    </StackPanel>
+
+                    <Slider x:Name="EdgeRadiusSlider"
+                            Width="180"
+                            Minimum="5"
+                            Maximum="50"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Value="{Binding EdgeRadius, Mode=TwoWay}"
+                            TickPlacement="BottomRight"
+                            AutoToolTipPlacement="TopLeft"
+                            AutoToolTipPrecision="0"
+                            IsSnapToTickEnabled="True"
+                            TickFrequency="5"
+                            Margin="0,0,0,10" />
+
+                    <!-- Enabled Corners -->
+                    <GroupBox Header="Active Screen Corners"
+                              Margin="0,0,0,5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <CheckBox Grid.Row="0"
+                                      Grid.Column="0"
+                                      Content="Top Left"
+                                      Margin="5"
+                                      IsChecked="{Binding EnableTopLeft, Mode=TwoWay}" />
+
+                            <CheckBox Grid.Row="0"
+                                      Grid.Column="1"
+                                      Content="Top Right"
+                                      Margin="5"
+                                      IsChecked="{Binding EnableTopRight, Mode=TwoWay}" />
+
+                            <CheckBox Grid.Row="1"
+                                      Grid.Column="0"
+                                      Content="Bottom Left"
+                                      Margin="5"
+                                      IsChecked="{Binding EnableBottomLeft, Mode=TwoWay}" />
+
+                            <CheckBox Grid.Row="1"
+                                      Grid.Column="1"
+                                      Content="Bottom Right"
+                                      Margin="5"
+                                      IsChecked="{Binding EnableBottomRight, Mode=TwoWay}" />
+                        </Grid>
+                    </GroupBox>
+                </StackPanel>
+            </Border>
+
+            <!-- Close Button -->
             <Button Content="Close"
-                    Grid.Row="3"
+                    Grid.Row="9"
                     Grid.Column="1"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Width="80"
                     Height="22"
-                    Margin="0 20 0 0"
+                    Margin="0,10,0,0"
                     Click="CloseButton_Click" />
         </Grid>
     </DockPanel>

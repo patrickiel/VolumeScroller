@@ -1,4 +1,8 @@
-﻿namespace VolumeScroller;
+﻿using Microsoft.Win32;
+
+using System.Diagnostics;
+
+namespace VolumeScroller;
 
 public class MainModel
 {
@@ -20,14 +24,63 @@ public class MainModel
         }
     }
 
-    public bool TaskbarMustBeVisible
+    public TriggerMode Mode
     {
-        get => Properties.Settings.Default.TaskbarMustBeVisible;
+        get => (TriggerMode)Properties.Settings.Default.TriggerMode;
         set
         {
-            Properties.Settings.Default.TaskbarMustBeVisible = value;
+            Properties.Settings.Default.TriggerMode = (int)value;
             Properties.Settings.Default.Save();
-            startupManager.Set(value);
+        }
+    }
+
+    public int EdgeRadius
+    {
+        get => Properties.Settings.Default.EdgeRadius;
+        set
+        {
+            Properties.Settings.Default.EdgeRadius = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
+    public bool EnableTopLeft
+    {
+        get => Properties.Settings.Default.EnableTopLeft;
+        set
+        {
+            Properties.Settings.Default.EnableTopLeft = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
+    public bool EnableTopRight
+    {
+        get => Properties.Settings.Default.EnableTopRight;
+        set
+        {
+            Properties.Settings.Default.EnableTopRight = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
+    public bool EnableBottomLeft
+    {
+        get => Properties.Settings.Default.EnableBottomLeft;
+        set
+        {
+            Properties.Settings.Default.EnableBottomLeft = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
+    public bool EnableBottomRight
+    {
+        get => Properties.Settings.Default.EnableBottomRight;
+        set
+        {
+            Properties.Settings.Default.EnableBottomRight = value;
+            Properties.Settings.Default.Save();
         }
     }
 
