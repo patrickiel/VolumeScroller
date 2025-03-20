@@ -52,7 +52,6 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             {
                 mainModel.EnableTopLeft = value;
                 OnPropertyChanged();
-                mainModel.UpdateVisualizer();
             }
         }
     }
@@ -68,7 +67,6 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             {
                 mainModel.EnableTopRight = value;
                 OnPropertyChanged();
-                mainModel.UpdateVisualizer();
             }
         }
     }
@@ -82,7 +80,6 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             {
                 mainModel.EnableBottomLeft = value;
                 OnPropertyChanged();
-                mainModel.UpdateVisualizer();
             }
         }
     }
@@ -96,7 +93,6 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             {
                 mainModel.EnableBottomRight = value;
                 OnPropertyChanged();
-                mainModel.UpdateVisualizer();
             }
         }
     }
@@ -104,7 +100,6 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
     public void Dispose()
     {
         SystemEvents.UserPreferenceChanged -= UserPreferenceChanged;
-        mainModel.Dispose();
     }
 
     private void UserPreferenceChanged(object sender, EventArgs e)

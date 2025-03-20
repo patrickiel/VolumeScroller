@@ -1,10 +1,8 @@
 ﻿namespace VolumeScroller;
 
-public class MainModel : IDisposable
+public class MainModel
 {
     private readonly StartupManager startupManager;
-    
-    private DebugVisualizer debugVisualizer;
 
     public MainModel()
     {
@@ -12,7 +10,7 @@ public class MainModel : IDisposable
         startupManager.Set(RunOnStartup);
     }
 
-    public static bool IsDebugMode
+    public bool IsDebugMode
     {
         get => Properties.Settings.Default.IsDebugMode;
         set
@@ -84,19 +82,6 @@ public class MainModel : IDisposable
             Properties.Settings.Default.Save();
         }
     }
-    
-    public void UpdateVisualizer()
-    {
-        if (IsDebugMode)
-        {
-            debugVisualizer?.Dispose();
-            debugVisualizer = new DebugVisualizer();
-        }
-        else
-        {
-            debugVisualizer?.Dispose();
-        }
-    }
 
     public static string TaskBarIconPath => GetTaskbarIconPath();
 
@@ -108,11 +93,6 @@ public class MainModel : IDisposable
         return isLightTheme
             ? "/Resources/VolumeScroller_light.ico"
             : "/Resources/VolumeScroller_dark.ico";
-    }
-
-    public void Dispose()
-    {
-        debugVisualizer?.Dispose();
     }
 
     public bool RunOnStartup
