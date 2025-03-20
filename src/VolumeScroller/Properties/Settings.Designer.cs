@@ -12,7 +12,7 @@ namespace VolumeScroller.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.13.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -49,13 +49,85 @@ namespace VolumeScroller.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool TaskbarMustBeVisible {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int TriggerMode {
             get {
-                return ((bool)(this["TaskbarMustBeVisible"]));
+                return ((int)(this["TriggerMode"]));
             }
             set {
-                this["TaskbarMustBeVisible"] = value;
+                this["TriggerMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableTopLeft {
+            get {
+                return ((bool)(this["EnableTopLeft"]));
+            }
+            set {
+                this["EnableTopLeft"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableTopRight {
+            get {
+                return ((bool)(this["EnableTopRight"]));
+            }
+            set {
+                this["EnableTopRight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableBottomLeft {
+            get {
+                return ((bool)(this["EnableBottomLeft"]));
+            }
+            set {
+                this["EnableBottomLeft"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableBottomRight {
+            get {
+                return ((bool)(this["EnableBottomRight"]));
+            }
+            set {
+                this["EnableBottomRight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsDebugMode {
+            get {
+                return ((bool)(this["IsDebugMode"]));
+            }
+            set {
+                this["IsDebugMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int EdgeTolerance {
+            get {
+                return ((int)(this["EdgeTolerance"]));
+            }
+            set {
+                this["EdgeTolerance"] = value;
             }
         }
     }

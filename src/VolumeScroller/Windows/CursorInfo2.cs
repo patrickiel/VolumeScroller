@@ -6,10 +6,14 @@ public static class CursorInfo2
     {
         var cursorPosition = GetCursorPosition();
 
-        return GetTaskbars().Select(i => GetRectangle(i))
+        return GetRelevantRectangles().Any(i => i.Contains(cursorPosition));
+    }
+
+    static Rectangle[] GetRelevantRectangles()
+    {
+        return [.. GetTaskbars().Select(GetRectangle)
                             .Where(r => r != null)
-                            .Cast<Rectangle>()
-                            .Any(i => i.Contains(cursorPosition));
+                            .Cast<Rectangle>()];
     }
 
     static List<IntPtr> GetTaskbars()

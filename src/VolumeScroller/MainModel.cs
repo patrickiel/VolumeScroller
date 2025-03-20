@@ -2,12 +2,25 @@
 
 public class MainModel
 {
-    readonly StartupManager startupManager;
+    private readonly StartupManager startupManager;
 
     public MainModel()
     {
         startupManager = new StartupManager(Process.GetCurrentProcess());
         startupManager.Set(RunOnStartup);
+    }
+
+    public bool IsDebugMode
+    {
+        get => Properties.Settings.Default.IsDebugMode;
+        set
+        {
+            if (Properties.Settings.Default.IsDebugMode != value)
+            {
+                Properties.Settings.Default.IsDebugMode = value;
+                Properties.Settings.Default.Save();
+            }
+        }
     }
 
     public static int Increment
@@ -20,14 +33,63 @@ public class MainModel
         }
     }
 
-    public bool TaskbarMustBeVisible
+    public TriggerMode Mode
     {
-        get => Properties.Settings.Default.TaskbarMustBeVisible;
+        get => (TriggerMode)Properties.Settings.Default.TriggerMode;
         set
         {
-            Properties.Settings.Default.TaskbarMustBeVisible = value;
+            Properties.Settings.Default.TriggerMode = (int)value;
             Properties.Settings.Default.Save();
-            startupManager.Set(value);
+        }
+    }
+
+    public bool EnableTopLeft
+    {
+        get => Properties.Settings.Default.EnableTopLeft;
+        set
+        {
+            Properties.Settings.Default.EnableTopLeft = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
+    public bool EnableTopRight
+    {
+        get => Properties.Settings.Default.EnableTopRight;
+        set
+        {
+            Properties.Settings.Default.EnableTopRight = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
+    public bool EnableBottomLeft
+    {
+        get => Properties.Settings.Default.EnableBottomLeft;
+        set
+        {
+            Properties.Settings.Default.EnableBottomLeft = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
+    public bool EnableBottomRight
+    {
+        get => Properties.Settings.Default.EnableBottomRight;
+        set
+        {
+            Properties.Settings.Default.EnableBottomRight = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
+    public int EdgeTolerance
+    {
+        get => Properties.Settings.Default.EdgeTolerance;
+        set
+        {
+            Properties.Settings.Default.EdgeTolerance = value;
+            Properties.Settings.Default.Save();
         }
     }
 
