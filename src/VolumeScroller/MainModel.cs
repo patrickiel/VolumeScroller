@@ -6,8 +6,7 @@ public class MainModel
 
     public MainModel()
     {
-        startupManager = new StartupManager(Process.GetCurrentProcess());
-        startupManager.Set(RunOnStartup);
+        startupManager = new StartupManager(Process.GetCurrentProcess(), RunOnStartup);
     }
 
     public bool IsDebugMode

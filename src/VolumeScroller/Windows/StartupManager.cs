@@ -1,14 +1,22 @@
-﻿namespace VolumeScroller;
+﻿using System.Diagnostics;
 
-internal class StartupManager(Process process)
+namespace VolumeScroller;
+
+internal class StartupManager
 {
-    private readonly Process process = process;
+    private readonly Process process;
+
+    public StartupManager(Process process, bool runOnStartup)
+    {
+        this.process = process;
+        Set(runOnStartup);
+    }
 
     public void Set(bool runOnStartup)
     {
         string filePath = process.MainModule.FileName;
 
-        RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+        RegistryKey key = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
         if (runOnStartup)
         {
