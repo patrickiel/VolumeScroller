@@ -29,7 +29,6 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         set => MainModel.Increment = value / 2;
     }
 
-    private TriggerMode _mode;
     public TriggerMode Mode
     {
         get => mainModel.Mode;
@@ -44,9 +43,6 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         }
     }
 
-    public bool IsEdgesModeSelected =>
-        Mode == TriggerMode.ScreenEdges;
-
     public int EdgeRadius
     {
         get => mainModel.EdgeRadius;
@@ -56,6 +52,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             {
                 mainModel.EdgeRadius = value;
                 OnPropertyChanged();
+                mainModel.UpdateVisualizer();
             }
         }
     }
@@ -69,9 +66,12 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             {
                 mainModel.EnableTopLeft = value;
                 OnPropertyChanged();
+                mainModel.UpdateVisualizer();
             }
         }
     }
+
+    public bool IsEdgesModeSelected => Mode == TriggerMode.ScreenEdges;
 
     public bool EnableTopRight
     {
@@ -82,6 +82,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             {
                 mainModel.EnableTopRight = value;
                 OnPropertyChanged();
+                mainModel.UpdateVisualizer();
             }
         }
     }
@@ -95,6 +96,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             {
                 mainModel.EnableBottomLeft = value;
                 OnPropertyChanged();
+                mainModel.UpdateVisualizer();
             }
         }
     }
@@ -108,12 +110,16 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             {
                 mainModel.EnableBottomRight = value;
                 OnPropertyChanged();
+                mainModel.UpdateVisualizer();
             }
         }
     }
 
     public void Dispose()
-        => SystemEvents.UserPreferenceChanged -= UserPreferenceChanged;
+    {
+        SystemEvents.UserPreferenceChanged -= UserPreferenceChanged;
+        mainModel.Dispose();
+    }
 
     private void UserPreferenceChanged(object sender, EventArgs e)
         => OnPropertyChanged(nameof(TaskBarIconPath));

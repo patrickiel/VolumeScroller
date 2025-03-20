@@ -1,5 +1,7 @@
 ﻿using System.Data;
 using System.Windows;
+using System.Diagnostics;
+using System.Linq;
 
 namespace VolumeScroller;
 
@@ -9,13 +11,20 @@ namespace VolumeScroller;
 public partial class App : Application
 {
     private AudioController audioController;
-    private static MainViewModel mainViewModel;
+    private MainViewModel mainViewModel;
 
-    public void App_Startup(object sender, StartupEventArgs e)
+    protected override void OnStartup(StartupEventArgs e)
     {
+        base.OnStartup(e);
+
         ShutdownIfAlreadyRunning();
-        InitializeTrayIcon();
-        audioController = new();
+        
+        var mainModel = new MainModel();
+        mainViewModel = new MainViewModel(mainModel);
+        var mainWindow = new MainWindow(mainViewModel);
+        audioController = new AudioController(mainViewModel);
+        
+        mainWindow.Show();
     }
 
     private static void ShutdownIfAlreadyRunning()
@@ -32,17 +41,9 @@ public partial class App : Application
         }
     }
 
-    private static void InitializeTrayIcon()
-    {
-        MainModel main = new();
-        mainViewModel = new(main);
-        MainWindow mainWindow = new(mainViewModel);
-        mainWindow.Show();
-    }
-
     private void Application_Exit(object sender, ExitEventArgs e)
     {
-        mainViewModel.Dispose();
-        audioController.Dispose();
+        mainViewModel?.Dispose();
+        audioController?.Dispose();
     }
 }

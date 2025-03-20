@@ -4,7 +4,7 @@ public class AudioController : IDisposable
 {
     private readonly MouseHook mouseHook;
 
-    public AudioController()
+    public AudioController(MainViewModel viewModel)
     {
         mouseHook = new();
         mouseHook.MouseWheelUp += _ => ChangeVolume(() => AudioControllerNative.VolumeUp());
@@ -35,10 +35,12 @@ public class AudioController : IDisposable
                                              Properties.Settings.Default.EnableTopLeft,
                                              Properties.Settings.Default.EnableTopRight,
                                              Properties.Settings.Default.EnableBottomRight,
-                                             Properties.Settings.Default.EdgeRadius),
+                                             Properties.Settings.Default.EdgeTolerance),
         _ => false,
     };
 
     public void Dispose()
-        => mouseHook.Terminate();
+    {
+        mouseHook.Terminate();
+    }
 }

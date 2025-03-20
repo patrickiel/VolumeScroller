@@ -77,11 +77,13 @@ public class MouseHook
 
     private IntPtr HookFunc(int nCode, IntPtr wParam, IntPtr lParam)
     {
-        if (nCode >= 0 && isRelevant())
+        if (nCode >= 0)
         {
             switch ((int)wParam)
             {
                 case WM_MOUSEWHEEL:
+                    if (!isRelevant()) break;
+                    
                     var data = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
 
                     if (data.mouseData == 7864320)

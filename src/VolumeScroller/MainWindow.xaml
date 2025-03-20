@@ -81,8 +81,19 @@
                       VerticalAlignment="Center"
                       IsChecked="{Binding RunOnStartup, Mode=TwoWay}" />
 
+            <!-- Debug Mode -->
+            <Label Content="Debug Mode"
+                   Grid.Row="2"
+                   Grid.Column="0"
+                   HorizontalAlignment="Right" />
+            <CheckBox Grid.Row="2"
+                      Grid.Column="1"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding IsDebugMode}" />
+
             <!-- Mode Selection -->
-            <TextBlock Grid.Row="2"
+            <TextBlock Grid.Row="3"
                        Grid.Column="0"
                        Grid.ColumnSpan="2"
                        Text="Mode"
@@ -90,7 +101,7 @@
                        Margin="0,10,0,5"
                        HorizontalAlignment="Left" />
 
-            <StackPanel Grid.Row="3"
+            <StackPanel Grid.Row="4"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
                         Margin="5">

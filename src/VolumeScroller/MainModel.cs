@@ -1,17 +1,28 @@
-﻿using Microsoft.Win32;
+﻿namespace VolumeScroller;
 
-using System.Diagnostics;
-
-namespace VolumeScroller;
-
-public class MainModel
+public class MainModel : IDisposable
 {
-    readonly StartupManager startupManager;
+    private readonly StartupManager startupManager;
+    
+    private DebugVisualizer debugVisualizer;
 
     public MainModel()
     {
         startupManager = new StartupManager(Process.GetCurrentProcess());
         startupManager.Set(RunOnStartup);
+    }
+
+    public static bool IsDebugMode
+    {
+        get => Properties.Settings.Default.IsDebugMode;
+        set
+        {
+            if (Properties.Settings.Default.IsDebugMode != value)
+            {
+                Properties.Settings.Default.IsDebugMode = value;
+                Properties.Settings.Default.Save();
+            }
+        }
     }
 
     public static int Increment
@@ -30,16 +41,6 @@ public class MainModel
         set
         {
             Properties.Settings.Default.TriggerMode = (int)value;
-            Properties.Settings.Default.Save();
-        }
-    }
-
-    public int EdgeRadius
-    {
-        get => Properties.Settings.Default.EdgeRadius;
-        set
-        {
-            Properties.Settings.Default.EdgeRadius = value;
             Properties.Settings.Default.Save();
         }
     }
@@ -83,6 +84,19 @@ public class MainModel
             Properties.Settings.Default.Save();
         }
     }
+    
+    public void UpdateVisualizer()
+    {
+        if (IsDebugMode)
+        {
+            debugVisualizer?.Dispose();
+            debugVisualizer = new DebugVisualizer();
+        }
+        else
+        {
+            debugVisualizer?.Dispose();
+        }
+    }
 
     public static string TaskBarIconPath => GetTaskbarIconPath();
 
@@ -94,6 +108,11 @@ public class MainModel
         return isLightTheme
             ? "/Resources/VolumeScroller_light.ico"
             : "/Resources/VolumeScroller_dark.ico";
+    }
+
+    public void Dispose()
+    {
+        debugVisualizer?.Dispose();
     }
 
     public bool RunOnStartup
