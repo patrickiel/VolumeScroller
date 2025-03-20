@@ -1,7 +1,7 @@
 ﻿namespace VolumeScroller;
 public static class CursorInfoEdges
 {
-    public static bool IsOnScreenEdges(bool bottomLeft, bool topLeft, bool topRight, bool bottomRight, int radius)
+    public static bool IsOnScreenEdges(bool bottomLeft, bool topLeft, bool topRight, bool bottomRight, int tollerance)
     {
         // Get the current cursor position
         Point cursorPos = GetCursorPosition();
@@ -15,51 +15,51 @@ public static class CursorInfoEdges
         Rectangle rect = activeWindowRect.Value;
 
         // Check if the cursor is near the enabled edges
-        if (bottomLeft && IsNearBottomLeft(cursorPos, rect, radius))
+        if (bottomLeft && IsNearBottomLeft(cursorPos, rect, tollerance))
             return true;
 
-        if (topLeft && IsNearTopLeft(cursorPos, rect, radius))
+        if (topLeft && IsNearTopLeft(cursorPos, rect, tollerance))
             return true;
 
-        if (topRight && IsNearTopRight(cursorPos, rect, radius))
+        if (topRight && IsNearTopRight(cursorPos, rect, tollerance))
             return true;
 
-        if (bottomRight && IsNearBottomRight(cursorPos, rect, radius))
+        if (bottomRight && IsNearBottomRight(cursorPos, rect, tollerance))
             return true;
 
         return false;
     }
 
-    private static bool IsNearBottomLeft(Point cursorPos, Rectangle rect, int radius)
+    private static bool IsNearBottomLeft(Point cursorPos, Rectangle rect, int tollerance)
     {
-        return cursorPos.X >= rect.Left &&
-               cursorPos.X <= rect.Left + radius &&
-               cursorPos.Y >= rect.Bottom - radius &&
-               cursorPos.Y <= rect.Bottom;
+        return cursorPos.X >= rect.Left - tollerance &&
+               cursorPos.X <= rect.Left + tollerance &&
+               cursorPos.Y >= rect.Bottom - tollerance &&
+               cursorPos.Y <= rect.Bottom + tollerance;
     }
 
-    private static bool IsNearTopLeft(Point cursorPos, Rectangle rect, int radius)
+    private static bool IsNearTopLeft(Point cursorPos, Rectangle rect, int tollerance)
     {
-        return cursorPos.X >= rect.Left &&
-               cursorPos.X <= rect.Left + radius &&
-               cursorPos.Y >= rect.Top &&
-               cursorPos.Y <= rect.Top + radius;
+        return cursorPos.X >= rect.Left - tollerance &&
+               cursorPos.X <= rect.Left + tollerance &&
+               cursorPos.Y >= rect.Top - tollerance &&
+               cursorPos.Y <= rect.Top + tollerance;
     }
 
-    private static bool IsNearTopRight(Point cursorPos, Rectangle rect, int radius)
+    private static bool IsNearTopRight(Point cursorPos, Rectangle rect, int tollerance)
     {
-        return cursorPos.X >= rect.Right - radius &&
-               cursorPos.X <= rect.Right &&
-               cursorPos.Y >= rect.Top &&
-               cursorPos.Y <= rect.Top + radius;
+        return cursorPos.X >= rect.Right - tollerance &&
+               cursorPos.X <= rect.Right + tollerance &&
+               cursorPos.Y >= rect.Top - tollerance &&
+               cursorPos.Y <= rect.Top + tollerance;
     }
 
-    private static bool IsNearBottomRight(Point cursorPos, Rectangle rect, int radius)
+    private static bool IsNearBottomRight(Point cursorPos, Rectangle rect, int tollerance)
     {
-        return cursorPos.X >= rect.Right - radius &&
-               cursorPos.X <= rect.Right &&
-               cursorPos.Y >= rect.Bottom - radius &&
-               cursorPos.Y <= rect.Bottom;
+        return cursorPos.X >= rect.Right - tollerance &&
+               cursorPos.X <= rect.Right + tollerance &&
+               cursorPos.Y >= rect.Bottom - tollerance &&
+               cursorPos.Y <= rect.Bottom + tollerance;
     }
 
     private static Rectangle? GetActiveWindowRect()

@@ -43,20 +43,6 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         }
     }
 
-    public int EdgeRadius
-    {
-        get => mainModel.EdgeRadius;
-        set
-        {
-            if (mainModel.EdgeRadius != value)
-            {
-                mainModel.EdgeRadius = value;
-                OnPropertyChanged();
-                mainModel.UpdateVisualizer();
-            }
-        }
-    }
-
     public bool EnableTopLeft
     {
         get => mainModel.EnableTopLeft;

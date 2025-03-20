@@ -35,7 +35,7 @@ public class AudioController : IDisposable
                                              Properties.Settings.Default.EnableTopLeft,
                                              Properties.Settings.Default.EnableTopRight,
                                              Properties.Settings.Default.EnableBottomRight,
-                                             Properties.Settings.Default.EdgeTolerance),
+                                             10),
         _ => false,
     };
 
