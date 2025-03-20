@@ -97,6 +97,19 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         }
     }
 
+    public int EdgeTolerance
+    {
+        get => mainModel.EdgeTolerance;
+        set
+        {
+            if (mainModel.EdgeTolerance != value)
+            {
+                mainModel.EdgeTolerance = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public void Dispose()
     {
         SystemEvents.UserPreferenceChanged -= UserPreferenceChanged;

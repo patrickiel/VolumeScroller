@@ -47,30 +47,29 @@
             </Grid.ColumnDefinitions>
 
             <!-- Volume Increment -->
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2">
-                <Label Content="Volume increment"
-                       HorizontalAlignment="Right" />
-                <Label Content="{Binding ElementName=IncrementSlider, Path=Value}"
-                       HorizontalAlignment="Left" />
-            </StackPanel>
-            <Slider x:Name="IncrementSlider"
-                    Width="100"
-                    Minimum="2"
-                    Maximum="20"
-                    Grid.Column="1"
-                    Grid.Row="0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Bottom"
-                    Value="{Binding Increment, Mode=TwoWay}"
-                    TickPlacement="BottomRight"
-                    AutoToolTipPlacement="TopLeft"
-                    AutoToolTipPrecision="0"
-                    IsSnapToTickEnabled="True"
-                    TickFrequency="2" />
 
+            <Label Content="Volume increment"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   HorizontalAlignment="Right"/>
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        Grid.Row="0">
+                <Slider x:Name="IncrementSlider"
+                        Width="100"
+                        Minimum="2"
+                        Maximum="20"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Value="{Binding Increment, Mode=TwoWay}"
+                        TickPlacement="BottomRight"
+                        AutoToolTipPlacement="TopLeft"
+                        AutoToolTipPrecision="0"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="2" />
+
+                <Label Content="{Binding ElementName=IncrementSlider, Path=Value}" />
+            </StackPanel>
             <!-- Run on startup -->
             <Label Content="Run on startup"
                    Grid.Row="1"
@@ -80,17 +79,6 @@
                       Grid.Column="1"
                       VerticalAlignment="Center"
                       IsChecked="{Binding RunOnStartup, Mode=TwoWay}" />
-
-            <!-- Debug Mode -->
-            <Label Content="Debug Mode"
-                   Grid.Row="2"
-                   Grid.Column="0"
-                   HorizontalAlignment="Right" />
-            <CheckBox Grid.Row="2"
-                      Grid.Column="1"
-                      HorizontalAlignment="Left"
-                      VerticalAlignment="Center"
-                      IsChecked="{Binding IsDebugMode}" />
 
             <!-- Mode Selection -->
             <TextBlock Grid.Row="3"
@@ -136,21 +124,21 @@
                                Margin="0,0,0,5"
                                HorizontalAlignment="Left" />
 
-                    <!-- Edge Radius -->
+                    <!-- Edge Tolerance -->
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="Edge detection radius"
+                        <Label Content="Edge detection tolerance"
                                HorizontalAlignment="Left" />
-                        <Label Content="{Binding ElementName=EdgeRadiusSlider, Path=Value, StringFormat={}{0} px}"
+                        <Label Content="{Binding ElementName=EdgeToleranceSlider, Path=Value, StringFormat={}{0} px}"
                                HorizontalAlignment="Left" />
                     </StackPanel>
 
-                    <Slider x:Name="EdgeRadiusSlider"
+                    <Slider x:Name="EdgeToleranceSlider"
                             Width="180"
-                            Minimum="5"
+                            Minimum="0"
                             Maximum="50"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Bottom"
-                            Value="{Binding EdgeRadius, Mode=TwoWay}"
+                            Value="{Binding EdgeTolerance, Mode=TwoWay}"
                             TickPlacement="BottomRight"
                             AutoToolTipPlacement="TopLeft"
                             AutoToolTipPrecision="0"

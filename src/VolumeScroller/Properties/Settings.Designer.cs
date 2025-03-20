@@ -118,5 +118,17 @@ namespace VolumeScroller.Properties {
                 this["IsDebugMode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int EdgeTolerance {
+            get {
+                return ((int)(this["EdgeTolerance"]));
+            }
+            set {
+                this["EdgeTolerance"] = value;
+            }
+        }
     }
 }

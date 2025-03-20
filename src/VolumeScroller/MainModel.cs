@@ -83,6 +83,16 @@ public class MainModel
         }
     }
 
+    public int EdgeTolerance
+    {
+        get => Properties.Settings.Default.EdgeTolerance;
+        set
+        {
+            Properties.Settings.Default.EdgeTolerance = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
     public static string TaskBarIconPath => GetTaskbarIconPath();
 
     private static string GetTaskbarIconPath()
