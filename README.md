@@ -12,8 +12,8 @@ Demonstration: https://www.youtube.com/watch?v=BXunyRh0T_w
 
 ## Features
 - Three operation modes:
-    1. Taskbar Only - Move the mouse over the visible taskbar and scroll up or down (requires taskbar to be visible)
-    2. Taskbar Always - Works with both visible and hidden taskbar
+    1. Taskbar - Works with both visible and hidden taskbar
+    2. Taskbar Visible - Move the mouse over the visible taskbar and scroll up or down (requires taskbar to be visible)
     3. Screen Edges - Change volume by scrolling near the screen edges (configurable for all four corners)
 - Run on startup (customizable)
 - Custom volume increment
