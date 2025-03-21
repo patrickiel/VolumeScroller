@@ -29,8 +29,8 @@ public class AudioController : IDisposable
 
     private static bool Applies() => Properties.Settings.Default.TriggerMode switch
     {
-        0 => CursorInfo1.IsOnTaskbar(),
-        1 => CursorInfo2.IsOnTaskbar(),
+        0 => CursorInfoTaskbarAlways.IsOnTaskbar(),
+        1 => CursorInfoTaskbarVisible.IsOnTaskbar(),
         2 => CursorInfoEdges.IsOnScreenEdges(Properties.Settings.Default.EnableBottomLeft,
                                              Properties.Settings.Default.EnableTopLeft,
                                              Properties.Settings.Default.EnableTopRight,

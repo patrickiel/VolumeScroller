@@ -93,14 +93,14 @@
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
                         Margin="5">
-                <RadioButton Content="Taskbar Always (Works with visible or hidden taskbar)"
+                <RadioButton Content="Taskbar (Works with visible or hidden taskbar)"
                              Margin="0,3,0,3"
                              IsChecked="{Binding Mode, ConverterParameter=TaskbarAlways, Converter={StaticResource EnumBooleanConverter}}"
                              GroupName="TriggerMode" />
                 
-                <RadioButton Content="Taskbar Only (Requires visible taskbar)"
+                <RadioButton Content="Taskbar Visible (Requires visible taskbar)"
                              Margin="0,3,0,3"
-                             IsChecked="{Binding Mode, ConverterParameter=TaskbarOnly, Converter={StaticResource EnumBooleanConverter}}"
+                             IsChecked="{Binding Mode, ConverterParameter=TaskbarVisibleOnly, Converter={StaticResource EnumBooleanConverter}}"
                              GroupName="TriggerMode" />
 
                 <RadioButton Content="Screen Edges"

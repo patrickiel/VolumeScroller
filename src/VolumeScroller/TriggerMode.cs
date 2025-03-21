@@ -13,7 +13,7 @@
         /// <summary>
         /// Requires visible taskbar to function
         /// </summary>
-        TaskbarOnly,
+        TaskbarVisibleOnly,
 
         /// <summary>
         /// Uses screen edges for triggering volume control

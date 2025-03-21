@@ -1,6 +1,6 @@
 ﻿namespace VolumeScroller;
 
-public static class CursorInfo2
+public static class CursorInfoTaskbarAlways
 {
     public static bool IsOnTaskbar()
     {
