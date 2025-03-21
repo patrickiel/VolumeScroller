@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Input;
+using System.Text.RegularExpressions;
 
 namespace VolumeScroller;
 
@@ -33,6 +35,18 @@ public partial class MainWindow : Window
 
     void SettingsMenuItem_Click(object sender, RoutedEventArgs e)
         => ShowWindow();
+
+    void EdgeTolerance_PreviewTextInput(object sender, TextCompositionEventArgs e)
+    {
+        // Only allow digits
+        e.Handled = !Regex.IsMatch(e.Text, "^[0-9]+$");
+    }
+
+    void EdgeTolerance_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        // Allow control keys like backspace, delete, arrow keys etc.
+        e.Handled = e.Key == Key.Space;
+    }
 
     void HideWindow()
     {

@@ -93,14 +93,14 @@
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
                         Margin="5">
-                <RadioButton Content="Taskbar Only (Requires visible taskbar)"
-                             Margin="0,3,0,3"
-                             IsChecked="{Binding Mode, ConverterParameter=TaskbarOnly, Converter={StaticResource EnumBooleanConverter}}"
-                             GroupName="TriggerMode" />
-
                 <RadioButton Content="Taskbar Always (Works with visible or hidden taskbar)"
                              Margin="0,3,0,3"
                              IsChecked="{Binding Mode, ConverterParameter=TaskbarAlways, Converter={StaticResource EnumBooleanConverter}}"
+                             GroupName="TriggerMode" />
+                
+                <RadioButton Content="Taskbar Only (Requires visible taskbar)"
+                             Margin="0,3,0,3"
+                             IsChecked="{Binding Mode, ConverterParameter=TaskbarOnly, Converter={StaticResource EnumBooleanConverter}}"
                              GroupName="TriggerMode" />
 
                 <RadioButton Content="Screen Edges"
@@ -128,23 +128,37 @@
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Edge detection tolerance"
                                HorizontalAlignment="Left" />
-                        <Label Content="{Binding ElementName=EdgeToleranceSlider, Path=Value, StringFormat={}{0} px}"
-                               HorizontalAlignment="Left" />
+                        <TextBox Width="50"
+                                 Margin="5,0"
+                                 PreviewTextInput="EdgeTolerance_PreviewTextInput"
+                                 PreviewKeyDown="EdgeTolerance_PreviewKeyDown"
+                                 VerticalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="EdgeTolerance"
+                                         Mode="TwoWay"
+                                         UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <local:EdgeToleranceValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Style.Triggers>
+                                        <Trigger Property="Validation.HasError" Value="True">
+                                            <Setter Property="ToolTip" 
+                                                    Value="{Binding RelativeSource={RelativeSource Self}, 
+                                                    Path=(Validation.Errors)[0].ErrorContent}" />
+                                            <Setter Property="Background" Value="#FFEBEE" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                        <Label Content="px" 
+                               Margin="0,0,5,0"
+                               VerticalAlignment="Center" />
                     </StackPanel>
-
-                    <Slider x:Name="EdgeToleranceSlider"
-                            Width="180"
-                            Minimum="0"
-                            Maximum="50"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
-                            Value="{Binding EdgeTolerance, Mode=TwoWay}"
-                            TickPlacement="BottomRight"
-                            AutoToolTipPlacement="TopLeft"
-                            AutoToolTipPrecision="0"
-                            IsSnapToTickEnabled="True"
-                            TickFrequency="5"
-                            Margin="0,0,0,10" />
 
                     <!-- Enabled Corners -->
                     <GroupBox Header="Active Screen Corners"
