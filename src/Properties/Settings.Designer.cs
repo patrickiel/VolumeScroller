@@ -130,5 +130,17 @@ namespace VolumeScroller.Properties {
                 this["EdgeTolerance"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableCtrlMute {
+            get {
+                return ((bool)(this["EnableCtrlMute"]));
+            }
+            set {
+                this["EnableCtrlMute"] = value;
+            }
+        }
     }
 }

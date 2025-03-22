@@ -92,6 +92,16 @@ public class MainModel
         }
     }
 
+    public bool EnableCtrlMute
+    {
+        get => Properties.Settings.Default.EnableCtrlMute;
+        set
+        {
+            Properties.Settings.Default.EnableCtrlMute = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
     public static string TaskBarIconPath => GetTaskbarIconPath();
 
     private static string GetTaskbarIconPath()

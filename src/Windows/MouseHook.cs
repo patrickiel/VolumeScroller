@@ -8,6 +8,9 @@ public class MouseHook
     const int WM_MBUTTONDOWN = 0x0207;
     const int WM_MBUTTONUP = 0x0208;
 
+    // Virtual key code for CTRL
+    const int VK_CONTROL = 0x11;
+
     MouseHookHandler hookHandler;
     IntPtr hookID = IntPtr.Zero;
     Func<bool> isRelevant;
@@ -36,8 +39,16 @@ public class MouseHook
 
     public event MouseHookCallback MouseWheelDown;
     public event MouseHookCallback MouseWheelUp;
+    public event MouseHookCallback CtrlMouseWheelDown;
+    public event MouseHookCallback CtrlMouseWheelUp;
     public event MouseHookCallback MiddleButtonDown;
     public event MouseHookCallback MiddleButtonUp;
+    
+    // Check if Ctrl key is pressed
+    private static bool IsCtrlKeyPressed()
+    {
+        return (GetAsyncKeyState(VK_CONTROL) & 0x8000) != 0;
+    }
 
     public void Initialize(Func<bool> isRelevant)
     {
@@ -85,15 +96,30 @@ public class MouseHook
                     if (!isRelevant()) break;
                     
                     var data = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
+                    bool isCtrlPressed = IsCtrlKeyPressed();
 
-                    if (data.mouseData == 7864320)
+                    if (data.mouseData == 7864320) // Wheel Up
                     {
-                        MouseWheelUp?.Invoke(data);
+                        if (isCtrlPressed)
+                        {
+                            CtrlMouseWheelUp?.Invoke(data);
+                        }
+                        else
+                        {
+                            MouseWheelUp?.Invoke(data);
+                        }
                         return new IntPtr(1); // suppresses native behaviour
                     }
-                    else if (data.mouseData == 4287102976)
+                    else if (data.mouseData == 4287102976) // Wheel Down
                     {
-                        MouseWheelDown?.Invoke(data);
+                        if (isCtrlPressed)
+                        {
+                            CtrlMouseWheelDown?.Invoke(data);
+                        }
+                        else
+                        {
+                            MouseWheelDown?.Invoke(data);
+                        }
                         return new IntPtr(1); // suppresses native behaviour
                     }
                     break;
@@ -126,4 +152,7 @@ public class MouseHook
 
     [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
     internal static extern IntPtr GetModuleHandle(string lpModuleName);
+    
+    [DllImport("user32.dll")]
+    internal static extern short GetAsyncKeyState(int vKey);
 }

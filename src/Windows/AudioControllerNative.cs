@@ -7,6 +7,9 @@ public static class AudioControllerNative
     const byte VolumeUpCode = 0xAF;
     const uint ExtendedKey = 0x0001;
     const uint KeyUp = 0x0002;
+    
+    // Track the current mute state internally
+    private static bool isMuted = false;
 
     [DllImport("user32.dll")]
     static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
@@ -30,5 +33,27 @@ public static class AudioControllerNative
     {
         keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey, 0);
         keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey | KeyUp, 0);
+        isMuted = !isMuted; // Toggle the tracked state
+    }
+    
+    public static void Mute()
+    {
+        if (!isMuted)
+        {
+            ToggleMute(); // Only toggle if not already muted
+        }
+    }
+    
+    public static void Unmute()
+    {
+        if (isMuted)
+        {
+            ToggleMute(); // Only toggle if already muted
+        }
+    }
+    
+    public static bool GetMuteState()
+    {
+        return isMuted;
     }
 }

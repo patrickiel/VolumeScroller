@@ -40,6 +40,7 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -79,9 +80,19 @@
                       Grid.Column="1"
                       VerticalAlignment="Center"
                       IsChecked="{Binding RunOnStartup, Mode=TwoWay}" />
+                      
+            <!-- Enable Ctrl+Scroll for Mute/Unmute -->
+            <Label Content="Ctrl+Scroll for Mute/Unmute"
+                   Grid.Row="2"
+                   Grid.Column="0"
+                   HorizontalAlignment="Right" />
+            <CheckBox Grid.Row="2"
+                      Grid.Column="1"
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding EnableCtrlMute, Mode=TwoWay}" />
 
             <!-- Mode Selection -->
-            <TextBlock Grid.Row="3"
+            <TextBlock Grid.Row="4"
                        Grid.Column="0"
                        Grid.ColumnSpan="2"
                        Text="Mode"
@@ -89,7 +100,7 @@
                        Margin="0,10,0,5"
                        HorizontalAlignment="Left" />
 
-            <StackPanel Grid.Row="4"
+            <StackPanel Grid.Row="5"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
                         Margin="5">
@@ -110,7 +121,7 @@
             </StackPanel>
 
             <!-- Screen Edges Settings Section -->
-            <Border Grid.Row="5"
+            <Border Grid.Row="6"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     BorderBrush="LightGray"
@@ -203,7 +214,7 @@
 
             <!-- Close Button -->
             <Button Content="Close"
-                    Grid.Row="9"
+                    Grid.Row="10"
                     Grid.Column="1"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"

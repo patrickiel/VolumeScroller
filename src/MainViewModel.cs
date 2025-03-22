@@ -110,6 +110,19 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         }
     }
 
+    public bool EnableCtrlMute
+    {
+        get => mainModel.EnableCtrlMute;
+        set
+        {
+            if (mainModel.EnableCtrlMute != value)
+            {
+                mainModel.EnableCtrlMute = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public void Dispose()
     {
         SystemEvents.UserPreferenceChanged -= UserPreferenceChanged;
