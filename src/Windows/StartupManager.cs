@@ -16,7 +16,7 @@ internal class StartupManager
     {
         string filePath = process.MainModule.FileName;
 
-        RegistryKey key = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+        RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
         if (runOnStartup)
         {
