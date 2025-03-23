@@ -10,6 +10,8 @@ public static class AudioControllerNative
     
     // Track the current mute state internally
     private static bool isMuted = false;
+    // Lock object to prevent concurrent state modifications
+    private static readonly object muteLock = new();
 
     [DllImport("user32.dll")]
     static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
@@ -31,29 +33,45 @@ public static class AudioControllerNative
 
     public static void ToggleMute()
     {
-        keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey, 0);
-        keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey | KeyUp, 0);
-        isMuted = !isMuted; // Toggle the tracked state
+        lock (muteLock)
+        {
+            keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey, 0);
+            keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey | KeyUp, 0);
+            isMuted = !isMuted; // Toggle the tracked state
+        }
     }
     
     public static void Mute()
     {
-        if (!isMuted)
+        lock (muteLock)
         {
-            ToggleMute(); // Only toggle if not already muted
+            if (!isMuted)
+            {
+                keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey, 0);
+                keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey | KeyUp, 0);
+                isMuted = true;
+            }
         }
     }
     
     public static void Unmute()
     {
-        if (isMuted)
+        lock (muteLock)
         {
-            ToggleMute(); // Only toggle if already muted
+            if (isMuted)
+            {
+                keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey, 0);
+                keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey | KeyUp, 0);
+                isMuted = false;
+            }
         }
     }
     
     public static bool GetMuteState()
     {
-        return isMuted;
+        lock (muteLock)
+        {
+            return isMuted;
+        }
     }
 }

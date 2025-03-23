@@ -1,9 +1,13 @@
 ﻿namespace VolumeScroller;
 
+using System;
+
 public class AudioController : IDisposable
 {
     private readonly MouseHook mouseHook;
     private readonly MainViewModel viewModel;
+    private DateTime lastMuteAction = DateTime.MinValue;
+    private static readonly TimeSpan MuteDebounceInterval = TimeSpan.FromMilliseconds(300);
 
     public AudioController(MainViewModel viewModel)
     {
@@ -28,6 +32,15 @@ public class AudioController : IDisposable
         
         if (applies)
         {
+            // Implement debounce to prevent rapid toggling when scrolling fast
+            DateTime now = DateTime.Now;
+            if (now - lastMuteAction < MuteDebounceInterval)
+            {
+                return;
+            }
+            
+            lastMuteAction = now;
+            
             if (shouldMute)
             {
                 AudioControllerNative.Mute();
