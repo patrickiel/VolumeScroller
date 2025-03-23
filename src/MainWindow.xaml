@@ -128,7 +128,7 @@
                     BorderThickness="1"
                     Margin="0,5,0,5"
                     Padding="5"
-                    Visibility="{Binding IsEdgesModeSelected, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    IsEnabled="{Binding IsEdgesModeSelected}">
                 <StackPanel>
                     <TextBlock Text="Screen Edges Settings"
                                FontWeight="Bold"
