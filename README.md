@@ -3,7 +3,14 @@ Volume Scroller allows you to quickly change the volume.
 
 ![This is an image](https://github.com/patrickiel/VolumeScroller/blob/main/icons/VolumeScroller_Logo_128.png) 
 
-### Download from [releases](https://github.com/patrickiel/VolumeScroller/releases).
+## Download
+
+### [Installer (Recommended)](https://github.com/patrickiel/VolumeScroller/releases/download/2.2.2/Volume.Scroller.2.2.2.exe)
+Standard installation with admin rights
+
+### [Portable Version](https://github.com/patrickiel/VolumeScroller/releases/download/2.2.2/Volume.Scroller.2.2.2.exe)
+No installation required, perfect for restricted environments  
+**Note:** May not work when programs with elevated rights are active
 
 ## How does it work?
 Demonstration: https://www.youtube.com/watch?v=BXunyRh0T_w
@@ -20,3 +27,5 @@ Demonstration: https://www.youtube.com/watch?v=BXunyRh0T_w
 - Multi-monitor support
 - Taskbar at different positions and sizes is supported
 - Auto Dark Mode support (for tray icon)
+
+![image](https://github.com/user-attachments/assets/5c095b20-6c6d-4f43-97ab-5c96ce43e772)
