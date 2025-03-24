@@ -7,11 +7,6 @@ public static class AudioControllerNative
     const byte VolumeUpCode = 0xAF;
     const uint ExtendedKey = 0x0001;
     const uint KeyUp = 0x0002;
-    
-    // Track the current mute state internally
-    private static bool isMuted = false;
-    // Lock object to prevent concurrent state modifications
-    private static readonly object muteLock = new();
 
     [DllImport("user32.dll")]
     static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
@@ -31,47 +26,23 @@ public static class AudioControllerNative
         keybd_event(VolumeDownCode, MapVirtualKey(VolumeDownCode, 0), ExtendedKey | KeyUp, 0);
     }
 
-    public static void ToggleMute()
+    public static void Mute()
     {
-        lock (muteLock)
+        bool isMuted = AudioMuteChecker.IsSystemMuted();
+        if (!isMuted)
         {
             keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey, 0);
             keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey | KeyUp, 0);
-            isMuted = !isMuted; // Toggle the tracked state
         }
     }
-    
-    public static void Mute()
-    {
-        lock (muteLock)
-        {
-            if (!isMuted)
-            {
-                keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey, 0);
-                keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey | KeyUp, 0);
-                isMuted = true;
-            }
-        }
-    }
-    
+
     public static void Unmute()
     {
-        lock (muteLock)
+        bool isMuted = AudioMuteChecker.IsSystemMuted();
+        if (isMuted)
         {
-            if (isMuted)
-            {
-                keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey, 0);
-                keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey | KeyUp, 0);
-                isMuted = false;
-            }
-        }
-    }
-    
-    public static bool GetMuteState()
-    {
-        lock (muteLock)
-        {
-            return isMuted;
+            keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey, 0);
+            keybd_event(MuteCode, MapVirtualKey(MuteCode, 0), ExtendedKey | KeyUp, 0);
         }
     }
 }
