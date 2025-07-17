@@ -3,15 +3,18 @@ Volume Scroller allows you to quickly change the volume.
 
 ![This is an image](https://github.com/patrickiel/VolumeScroller/blob/main/icons/VolumeScroller_Logo_128.png) 
 
-## Download
+## Installation
 
-### [Installer (Recommended)](https://github.com/patrickiel/VolumeScroller/releases/download/2.2.2/Volume.Scroller.2.2.2.exe)
-Standard installation with admin rights
+* **[Installer (Recommended)](https://github.com/patrickiel/VolumeScroller/releases/download/2.2.2/Volume.Scroller.2.2.2.exe)** – Standard setup
+* **[Portable Version](https://github.com/patrickiel/VolumeScroller/releases/download/2.2.2/Volume.Scroller.2.2.2.Portable.zip)** – No install needed
+* **Winget:**
 
-### [Portable Version](https://github.com/patrickiel/VolumeScroller/releases/download/2.2.2/Volume.Scroller.2.2.2.Portable.zip)
-No installation required, perfect for restricted environments  
-**Note:** May not work when programs with elevated rights are active
+  ```bash
+  winget install --id=PatrickDemichiel.VolumeScroller -e
+  ```
 
+  Don't have winget? [Install App Installer](https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1) from the Microsoft Store.
+  
 ## How does it work?
 Demonstration: https://www.youtube.com/watch?v=BXunyRh0T_w
 
