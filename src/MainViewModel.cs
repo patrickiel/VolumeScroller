@@ -123,6 +123,19 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         }
     }
 
+    public bool EnableAllEdges
+    {
+        get => mainModel.EnableAllEdges;
+        set
+        {
+            if (mainModel.EnableAllEdges != value)
+            {
+                mainModel.EnableAllEdges = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public void Dispose()
     {
         SystemEvents.UserPreferenceChanged -= UserPreferenceChanged;

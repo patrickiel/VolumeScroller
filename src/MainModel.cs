@@ -102,6 +102,16 @@ public class MainModel
         }
     }
 
+    public bool EnableAllEdges
+    {
+        get => Properties.Settings.Default.EnableAllEdges;
+        set
+        {
+            Properties.Settings.Default.EnableAllEdges = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
     public static string TaskBarIconPath => GetTaskbarIconPath();
 
     private static string GetTaskbarIconPath()
