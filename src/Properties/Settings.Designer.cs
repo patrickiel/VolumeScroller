@@ -130,6 +130,18 @@ namespace VolumeScroller.Properties {
                 this["EdgeTolerance"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int CornerTolerance {
+            get {
+                return ((int)(this["CornerTolerance"]));
+            }
+            set {
+                this["CornerTolerance"] = value;
+            }
+        }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -146,12 +158,48 @@ namespace VolumeScroller.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool EnableAllEdges {
+        public bool EnableTopEdge {
             get {
-                return ((bool)(this["EnableAllEdges"]));
+                return ((bool)(this["EnableTopEdge"]));
             }
             set {
-                this["EnableAllEdges"] = value;
+                this["EnableTopEdge"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableRightEdge {
+            get {
+                return ((bool)(this["EnableRightEdge"]));
+            }
+            set {
+                this["EnableRightEdge"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableBottomEdge {
+            get {
+                return ((bool)(this["EnableBottomEdge"]));
+            }
+            set {
+                this["EnableBottomEdge"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableLeftEdge {
+            get {
+                return ((bool)(this["EnableLeftEdge"]));
+            }
+            set {
+                this["EnableLeftEdge"] = value;
             }
         }
     }

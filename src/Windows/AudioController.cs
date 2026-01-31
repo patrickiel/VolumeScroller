@@ -71,20 +71,28 @@ public class AudioController : IDisposable
     {
         0 => CursorInfoTaskbarAlways.IsOnTaskbar(),
         1 => CursorInfoTaskbarVisible.IsOnTaskbar(),
-        2 => AppliesForEdges(),
+        2 => AppliesForCorners(),
+        3 => AppliesForEdges(),
         _ => false,
     };
 
-    private static bool AppliesForEdges()
+    private static bool AppliesForCorners()
     {
-        if (Properties.Settings.Default.EnableAllEdges)
-            return CursorInfoEdges.IsOnAnyScreenEdge(Properties.Settings.Default.EdgeTolerance);
-
-        return CursorInfoEdges.IsOnScreenEdges(
+        return CursorInfoCorners.IsOnScreenCorners(
             Properties.Settings.Default.EnableBottomLeft,
             Properties.Settings.Default.EnableTopLeft,
             Properties.Settings.Default.EnableTopRight,
             Properties.Settings.Default.EnableBottomRight,
+            Properties.Settings.Default.CornerTolerance);
+    }
+
+    private static bool AppliesForEdges()
+    {
+        return CursorInfoEdges.IsOnScreenEdges(
+            Properties.Settings.Default.EnableTopEdge,
+            Properties.Settings.Default.EnableRightEdge,
+            Properties.Settings.Default.EnableBottomEdge,
+            Properties.Settings.Default.EnableLeftEdge,
             Properties.Settings.Default.EdgeTolerance);
     }
 

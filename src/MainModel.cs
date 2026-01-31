@@ -92,6 +92,16 @@ public class MainModel
         }
     }
 
+    public int CornerTolerance
+    {
+        get => Properties.Settings.Default.CornerTolerance;
+        set
+        {
+            Properties.Settings.Default.CornerTolerance = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
     public bool EnableCtrlMute
     {
         get => Properties.Settings.Default.EnableCtrlMute;
@@ -102,12 +112,42 @@ public class MainModel
         }
     }
 
-    public bool EnableAllEdges
+    public bool EnableTopEdge
     {
-        get => Properties.Settings.Default.EnableAllEdges;
+        get => Properties.Settings.Default.EnableTopEdge;
         set
         {
-            Properties.Settings.Default.EnableAllEdges = value;
+            Properties.Settings.Default.EnableTopEdge = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
+    public bool EnableRightEdge
+    {
+        get => Properties.Settings.Default.EnableRightEdge;
+        set
+        {
+            Properties.Settings.Default.EnableRightEdge = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
+    public bool EnableBottomEdge
+    {
+        get => Properties.Settings.Default.EnableBottomEdge;
+        set
+        {
+            Properties.Settings.Default.EnableBottomEdge = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
+    public bool EnableLeftEdge
+    {
+        get => Properties.Settings.Default.EnableLeftEdge;
+        set
+        {
+            Properties.Settings.Default.EnableLeftEdge = value;
             Properties.Settings.Default.Save();
         }
     }

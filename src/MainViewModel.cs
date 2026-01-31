@@ -38,6 +38,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             {
                 mainModel.Mode = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(IsCornersModeSelected));
                 OnPropertyChanged(nameof(IsEdgesModeSelected));
             }
         }
@@ -55,6 +56,8 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             }
         }
     }
+
+    public bool IsCornersModeSelected => Mode == TriggerMode.ScreenCorners;
 
     public bool IsEdgesModeSelected => Mode == TriggerMode.ScreenEdges;
 
@@ -110,6 +113,19 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         }
     }
 
+    public int CornerTolerance
+    {
+        get => mainModel.CornerTolerance;
+        set
+        {
+            if (mainModel.CornerTolerance != value)
+            {
+                mainModel.CornerTolerance = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public bool EnableCtrlMute
     {
         get => mainModel.EnableCtrlMute;
@@ -123,14 +139,53 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         }
     }
 
-    public bool EnableAllEdges
+    public bool EnableTopEdge
     {
-        get => mainModel.EnableAllEdges;
+        get => mainModel.EnableTopEdge;
         set
         {
-            if (mainModel.EnableAllEdges != value)
+            if (mainModel.EnableTopEdge != value)
             {
-                mainModel.EnableAllEdges = value;
+                mainModel.EnableTopEdge = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool EnableRightEdge
+    {
+        get => mainModel.EnableRightEdge;
+        set
+        {
+            if (mainModel.EnableRightEdge != value)
+            {
+                mainModel.EnableRightEdge = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool EnableBottomEdge
+    {
+        get => mainModel.EnableBottomEdge;
+        set
+        {
+            if (mainModel.EnableBottomEdge != value)
+            {
+                mainModel.EnableBottomEdge = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool EnableLeftEdge
+    {
+        get => mainModel.EnableLeftEdge;
+        set
+        {
+            if (mainModel.EnableLeftEdge != value)
+            {
+                mainModel.EnableLeftEdge = value;
                 OnPropertyChanged();
             }
         }
