@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Volume Scroller"
-#define MyAppVersion "2.2.2"
+#define MyAppVersion "2.3.0"
 #define MyAppPublisher "Patrick Demichiel"
 #define MyAppURL "https://github.com/patrickiel/VolumeScroller"
 #define MyAppExeName "VolumeScroller.exe"

@@ -5,8 +5,8 @@ Volume Scroller allows you to quickly change the volume.
 
 ## Installation
 
-* **[Installer (Recommended)](https://github.com/patrickiel/VolumeScroller/releases/download/2.2.2/Volume.Scroller.2.2.2.exe)** – Standard setup
-* **[Portable Version](https://github.com/patrickiel/VolumeScroller/releases/download/2.2.2/Volume.Scroller.2.2.2.Portable.zip)** – No install needed
+* **[Installer (Recommended)](https://github.com/patrickiel/VolumeScroller/releases/download/2.3.0/Volume.Scroller.2.3.0.exe)** – Standard setup
+* **[Portable Version](https://github.com/patrickiel/VolumeScroller/releases/download/2.3.0/Volume.Scroller.2.3.0.Portable.zip)** – No install needed
 * **Winget:**
 
   ```bash
