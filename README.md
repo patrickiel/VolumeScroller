@@ -31,4 +31,5 @@ Demonstration: https://www.youtube.com/watch?v=BXunyRh0T_w
 - Taskbar at different positions and sizes is supported
 - Auto Dark Mode support (for tray icon)
 
-![image](https://github.com/user-attachments/assets/5c095b20-6c6d-4f43-97ab-5c96ce43e772)
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/739c9aa1-1535-4fd1-9519-abe85e3741df" />
+
