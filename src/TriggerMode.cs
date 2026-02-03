@@ -16,8 +16,8 @@
         TaskbarVisibleOnly,
 
         /// <summary>
-        /// Uses screen edges for triggering volume control
+        /// Uses screen borders (edges and corners) for triggering volume control
         /// </summary>
-        ScreenEdges
+        ScreenBorders
     }
 }

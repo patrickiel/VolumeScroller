@@ -30,17 +30,17 @@
         </tb:TaskbarIcon>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -114,9 +114,9 @@
                              IsChecked="{Binding Mode, ConverterParameter=TaskbarVisibleOnly, Converter={StaticResource EnumBooleanConverter}}"
                              GroupName="TriggerMode" />
 
-                <RadioButton Content="Screen Edges"
+                <RadioButton Content="Screen Borders"
                              Margin="0,3,0,3"
-                             IsChecked="{Binding Mode, ConverterParameter=ScreenEdges, Converter={StaticResource EnumBooleanConverter}}"
+                             IsChecked="{Binding Mode, ConverterParameter=ScreenBorders, Converter={StaticResource EnumBooleanConverter}}"
                              GroupName="TriggerMode" />
             </StackPanel>
 
@@ -128,16 +128,16 @@
                     BorderThickness="1"
                     Margin="0,5,0,5"
                     Padding="5"
-                    IsEnabled="{Binding IsEdgesModeSelected}">
+                    IsEnabled="{Binding IsBordersModeSelected}">
                 <StackPanel>
-                    <TextBlock Text="Screen Edges Settings"
+                    <TextBlock Text="Screen Borders Settings"
                                FontWeight="Bold"
                                Margin="0,0,0,5"
                                HorizontalAlignment="Left" />
 
                     <!-- Edge Tolerance -->
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="Edge detection tolerance"
+                        <Label Content="Tolerance"
                                HorizontalAlignment="Left" />
                         <TextBox Width="50"
                                  Margin="5,0"
@@ -171,44 +171,179 @@
                                VerticalAlignment="Center" />
                     </StackPanel>
 
-                    <!-- Enabled Corners -->
-                    <GroupBox Header="Active Screen Corners"
-                              Margin="0,0,0,5">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                    <!-- Schematic Screen Border Selector -->
+                    <Grid Margin="0,10,0,5" HorizontalAlignment="Center">
+                        <Grid.Resources>
+                            <!-- Style for corner toggle buttons -->
+                            <Style x:Key="CornerToggleStyle" TargetType="ToggleButton">
+                                <Setter Property="Width" Value="24"/>
+                                <Setter Property="Height" Value="24"/>
+                                <Setter Property="Background" Value="#E0E0E0"/>
+                                <Setter Property="BorderBrush" Value="#888"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    CornerRadius="2">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="True">
+                                        <Setter Property="Background" Value="#4CAF50"/>
+                                        <Setter Property="BorderBrush" Value="#388E3C"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderBrush" Value="#333"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Background" Value="#F0F0F0"/>
+                                        <Setter Property="BorderBrush" Value="#CCC"/>
+                                        <Setter Property="Opacity" Value="0.5"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                            <!-- Style for horizontal edge toggle buttons -->
+                            <Style x:Key="HorizontalEdgeToggleStyle" TargetType="ToggleButton">
+                                <Setter Property="Height" Value="16"/>
+                                <Setter Property="Background" Value="#E0E0E0"/>
+                                <Setter Property="BorderBrush" Value="#888"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    CornerRadius="2">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="True">
+                                        <Setter Property="Background" Value="#4CAF50"/>
+                                        <Setter Property="BorderBrush" Value="#388E3C"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderBrush" Value="#333"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Background" Value="#F0F0F0"/>
+                                        <Setter Property="BorderBrush" Value="#CCC"/>
+                                        <Setter Property="Opacity" Value="0.5"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                            <!-- Style for vertical edge toggle buttons -->
+                            <Style x:Key="VerticalEdgeToggleStyle" TargetType="ToggleButton">
+                                <Setter Property="Width" Value="16"/>
+                                <Setter Property="Background" Value="#E0E0E0"/>
+                                <Setter Property="BorderBrush" Value="#888"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    CornerRadius="2">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="True">
+                                        <Setter Property="Background" Value="#4CAF50"/>
+                                        <Setter Property="BorderBrush" Value="#388E3C"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderBrush" Value="#333"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Background" Value="#F0F0F0"/>
+                                        <Setter Property="BorderBrush" Value="#CCC"/>
+                                        <Setter Property="Opacity" Value="0.5"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Resources>
 
-                            <CheckBox Grid.Row="0"
-                                      Grid.Column="0"
-                                      Content="Top Left"
-                                      Margin="5"
-                                      IsChecked="{Binding EnableTopLeft, Mode=TwoWay}" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="24"/>
+                            <RowDefinition Height="2"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="2"/>
+                            <RowDefinition Height="24"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="24"/>
+                            <ColumnDefinition Width="2"/>
+                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="2"/>
+                            <ColumnDefinition Width="24"/>
+                        </Grid.ColumnDefinitions>
 
-                            <CheckBox Grid.Row="0"
-                                      Grid.Column="1"
-                                      Content="Top Right"
-                                      Margin="5"
-                                      IsChecked="{Binding EnableTopRight, Mode=TwoWay}" />
+                        <!-- Top Row: TopLeft Corner, Top Edge, TopRight Corner -->
+                        <ToggleButton Grid.Row="0" Grid.Column="0"
+                                      Style="{StaticResource CornerToggleStyle}"
+                                      IsChecked="{Binding EnableTopLeft, Mode=TwoWay}"
+                                      ToolTip="Top Left Corner"/>
+                        <ToggleButton Grid.Row="0" Grid.Column="2"
+                                      Style="{StaticResource HorizontalEdgeToggleStyle}"
+                                      IsChecked="{Binding EnableTopEdge, Mode=TwoWay}"
+                                      ToolTip="Top Edge"
+                                      Height="24"/>
+                        <ToggleButton Grid.Row="0" Grid.Column="4"
+                                      Style="{StaticResource CornerToggleStyle}"
+                                      IsChecked="{Binding EnableTopRight, Mode=TwoWay}"
+                                      ToolTip="Top Right Corner"/>
 
-                            <CheckBox Grid.Row="1"
-                                      Grid.Column="0"
-                                      Content="Bottom Left"
-                                      Margin="5"
-                                      IsChecked="{Binding EnableBottomLeft, Mode=TwoWay}" />
+                        <!-- Middle Row: Left Edge, Screen Area, Right Edge -->
+                        <ToggleButton Grid.Row="2" Grid.Column="0"
+                                      Style="{StaticResource VerticalEdgeToggleStyle}"
+                                      IsChecked="{Binding EnableLeftEdge, Mode=TwoWay}"
+                                      ToolTip="Left Edge"
+                                      Width="24"/>
+                        <Border Grid.Row="2" Grid.Column="2"
+                                Background="#F5F5F5"
+                                BorderBrush="#CCC"
+                                BorderThickness="1"
+                                Height="70">
+                            <TextBlock Text="Screen"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="#999"
+                                       FontSize="12"/>
+                        </Border>
+                        <ToggleButton Grid.Row="2" Grid.Column="4"
+                                      Style="{StaticResource VerticalEdgeToggleStyle}"
+                                      IsChecked="{Binding EnableRightEdge, Mode=TwoWay}"
+                                      ToolTip="Right Edge"
+                                      Width="24"/>
 
-                            <CheckBox Grid.Row="1"
-                                      Grid.Column="1"
-                                      Content="Bottom Right"
-                                      Margin="5"
-                                      IsChecked="{Binding EnableBottomRight, Mode=TwoWay}" />
-                        </Grid>
-                    </GroupBox>
+                        <!-- Bottom Row: BottomLeft Corner, Bottom Edge, BottomRight Corner -->
+                        <ToggleButton Grid.Row="4" Grid.Column="0"
+                                      Style="{StaticResource CornerToggleStyle}"
+                                      IsChecked="{Binding EnableBottomLeft, Mode=TwoWay}"
+                                      ToolTip="Bottom Left Corner"/>
+                        <ToggleButton Grid.Row="4" Grid.Column="2"
+                                      Style="{StaticResource HorizontalEdgeToggleStyle}"
+                                      IsChecked="{Binding EnableBottomEdge, Mode=TwoWay}"
+                                      ToolTip="Bottom Edge"
+                                      Height="24"/>
+                        <ToggleButton Grid.Row="4" Grid.Column="4"
+                                      Style="{StaticResource CornerToggleStyle}"
+                                      IsChecked="{Binding EnableBottomRight, Mode=TwoWay}"
+                                      ToolTip="Bottom Right Corner"/>
+                    </Grid>
                 </StackPanel>
             </Border>
 

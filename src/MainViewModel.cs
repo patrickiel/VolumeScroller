@@ -38,7 +38,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             {
                 mainModel.Mode = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(IsEdgesModeSelected));
+                OnPropertyChanged(nameof(IsBordersModeSelected));
             }
         }
     }
@@ -56,7 +56,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         }
     }
 
-    public bool IsEdgesModeSelected => Mode == TriggerMode.ScreenEdges;
+    public bool IsBordersModeSelected => Mode == TriggerMode.ScreenBorders;
 
     public bool EnableTopRight
     {
@@ -118,6 +118,58 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             if (mainModel.EnableCtrlMute != value)
             {
                 mainModel.EnableCtrlMute = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool EnableTopEdge
+    {
+        get => mainModel.EnableTopEdge;
+        set
+        {
+            if (mainModel.EnableTopEdge != value)
+            {
+                mainModel.EnableTopEdge = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool EnableRightEdge
+    {
+        get => mainModel.EnableRightEdge;
+        set
+        {
+            if (mainModel.EnableRightEdge != value)
+            {
+                mainModel.EnableRightEdge = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool EnableBottomEdge
+    {
+        get => mainModel.EnableBottomEdge;
+        set
+        {
+            if (mainModel.EnableBottomEdge != value)
+            {
+                mainModel.EnableBottomEdge = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool EnableLeftEdge
+    {
+        get => mainModel.EnableLeftEdge;
+        set
+        {
+            if (mainModel.EnableLeftEdge != value)
+            {
+                mainModel.EnableLeftEdge = value;
                 OnPropertyChanged();
             }
         }

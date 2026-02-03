@@ -142,5 +142,53 @@ namespace VolumeScroller.Properties {
                 this["EnableCtrlMute"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableTopEdge {
+            get {
+                return ((bool)(this["EnableTopEdge"]));
+            }
+            set {
+                this["EnableTopEdge"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableRightEdge {
+            get {
+                return ((bool)(this["EnableRightEdge"]));
+            }
+            set {
+                this["EnableRightEdge"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableBottomEdge {
+            get {
+                return ((bool)(this["EnableBottomEdge"]));
+            }
+            set {
+                this["EnableBottomEdge"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableLeftEdge {
+            get {
+                return ((bool)(this["EnableLeftEdge"]));
+            }
+            set {
+                this["EnableLeftEdge"] = value;
+            }
+        }
     }
 }

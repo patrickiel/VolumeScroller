@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 public static class CursorInfoEdges
 {
-    public static bool IsOnScreenEdges(bool bottomLeft, bool topLeft, bool topRight, bool bottomRight, int tolerance)
+    public static bool IsOnScreenCorner(bool bottomLeft, bool topLeft, bool topRight, bool bottomRight, int tolerance)
     {
         // Get the current cursor position
         Point cursorPos = GetCursorPosition();
@@ -26,6 +26,67 @@ public static class CursorInfoEdges
 
             if (bottomRight && IsNearBottomRight(cursorPos, rect, tolerance))
                 return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Returns true if the cursor is near any enabled screen edge (full sides, not just corners)
+    /// </summary>
+    public static bool IsOnScreenEdge(bool top, bool right, bool bottom, bool left, int tolerance)
+    {
+        // Get the current cursor position
+        Point cursorPos = GetCursorPosition();
+
+        // Check all screens
+        foreach (Screen screen in Screen.AllScreens)
+        {
+            Rectangle rect = screen.Bounds;
+
+            if (IsNearEdge(cursorPos, rect, top, right, bottom, left, tolerance))
+                return true;
+        }
+
+        return false;
+    }
+
+    private static bool IsNearEdge(Point cursorPos, Rectangle rect, bool top, bool right, bool bottom, bool left, int tolerance)
+    {
+        if (top)
+        {
+            bool nearTop = cursorPos.Y >= rect.Top &&
+                           cursorPos.Y <= rect.Top + tolerance &&
+                           cursorPos.X >= rect.Left &&
+                           cursorPos.X <= rect.Right;
+            if (nearTop) return true;
+        }
+
+        if (right)
+        {
+            bool nearRight = cursorPos.X >= rect.Right - tolerance &&
+                             cursorPos.X <= rect.Right &&
+                             cursorPos.Y >= rect.Top &&
+                             cursorPos.Y <= rect.Bottom;
+            if (nearRight) return true;
+        }
+
+        if (bottom)
+        {
+            bool nearBottom = cursorPos.Y >= rect.Bottom - tolerance &&
+                              cursorPos.Y <= rect.Bottom &&
+                              cursorPos.X >= rect.Left &&
+                              cursorPos.X <= rect.Right;
+            if (nearBottom) return true;
+        }
+
+        if (left)
+        {
+            bool nearLeft = cursorPos.X >= rect.Left &&
+                            cursorPos.X <= rect.Left + tolerance &&
+                            cursorPos.Y >= rect.Top &&
+                            cursorPos.Y <= rect.Bottom;
+            if (nearLeft) return true;
         }
 
         return false;

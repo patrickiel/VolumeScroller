@@ -102,6 +102,46 @@ public class MainModel
         }
     }
 
+    public bool EnableTopEdge
+    {
+        get => Properties.Settings.Default.EnableTopEdge;
+        set
+        {
+            Properties.Settings.Default.EnableTopEdge = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
+    public bool EnableRightEdge
+    {
+        get => Properties.Settings.Default.EnableRightEdge;
+        set
+        {
+            Properties.Settings.Default.EnableRightEdge = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
+    public bool EnableBottomEdge
+    {
+        get => Properties.Settings.Default.EnableBottomEdge;
+        set
+        {
+            Properties.Settings.Default.EnableBottomEdge = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
+    public bool EnableLeftEdge
+    {
+        get => Properties.Settings.Default.EnableLeftEdge;
+        set
+        {
+            Properties.Settings.Default.EnableLeftEdge = value;
+            Properties.Settings.Default.Save();
+        }
+    }
+
     public static string TaskBarIconPath => GetTaskbarIconPath();
 
     private static string GetTaskbarIconPath()
